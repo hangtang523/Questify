@@ -1,0 +1,27 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'back-end/**'
+  pull_request:
+    paths:
+      - 'back-end/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+
+      - name: Build with Maven
+        run: |
+          cd backend
+          mvn clean install
