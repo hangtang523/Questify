@@ -20,8 +20,7 @@ const routes = [
       { path: 'home', name: 'Home', meta: { name: 'Dashboard' }, component: () => import('../views/manager/Home') },
       { path: 'admin', name: 'Admin', meta: { name: 'Admin Management' }, component: () => import('../views/manager/Admin') },
       { path: 'adminPerson', name: 'AdminPerson', meta: { name: 'Profile' }, component: () => import('../views/manager/AdminPerson') },
-      { path: 'password', name: 'Password', meta: { name: 'Reset Password' }, component: () => import('../views/manager/Password') },
-      { path: 'notice', name: 'Notice', meta: { name: 'Announcement' }, component: () => import('../views/manager/Notice') },
+      { path: 'password', name: 'Password', meta: { name: 'Reset Password' }, component: () => import('../views/manager/Password') }
     ]
   },
   {
