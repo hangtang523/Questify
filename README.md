@@ -38,9 +38,7 @@ This on-line questionnaire survey ans management system is to provide an efficie
 
 ## Roadmap
 
-### Spring 0
-
-## Roadmap
+### Sprint 0
 
 - [x] Project Initialization
 - [x] Fundamental Functionality (e.g. Login and File Uploading)
@@ -55,7 +53,7 @@ This on-line questionnaire survey ans management system is to provide an efficie
 
 Contributors names and contact info
 
-[@hangtang523](https://github.com/hangtang523)
+[@hangtang523](https://github.com/hangtang523)	[@ChenBowen-se](https://github.com/ChenBowen-se)	[@LiuYihan111](https://github.com/LiuYihan111)	[@RDKKKKKK](https://github.com/RDKKKKKK)	[@zscmngykx](https://github.com/zscmngykx)
 
 ## Version History
 
