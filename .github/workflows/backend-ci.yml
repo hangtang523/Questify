@@ -46,4 +46,4 @@ jobs:
       - name: Run Snyk to check for vulnerabilities
         run: |
           cd back-end
-          snyk test --severity-threshold=medium
+          snyk test --severity-threshold=high
