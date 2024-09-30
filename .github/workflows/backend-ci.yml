@@ -7,6 +7,7 @@ on:
   pull_request:
     paths:
       - 'back-end/**'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,3 +26,24 @@ jobs:
         run: |
           cd back-end
           mvn clean install
+
+  snyk:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Snyk
+        uses: snyk/actions/setup@master
+        with:
+          version: 'latest'
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Snyk to check for vulnerabilities
+        run: |
+          cd back-end
+          snyk monitor --org=my-org
+          snyk test --severity-threshold=medium
