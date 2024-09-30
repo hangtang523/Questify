@@ -35,15 +35,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Snyk
-        uses: snyk/actions/setup@master
-        with:
-          version: 'latest'
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk auth $SNYK_TOKEN
 
       - name: Run Snyk to check for vulnerabilities
         run: |
           cd back-end
-          snyk monitor --org=my-org
           snyk test --severity-threshold=medium
