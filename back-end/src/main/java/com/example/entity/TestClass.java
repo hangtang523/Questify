@@ -2,6 +2,5 @@ package com.example.entity;
 
 public class TestClass {
 
-
-    int a;
+    int a = 2;
 }
