@@ -29,6 +29,7 @@ jobs:
 
 
   test:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +48,7 @@ jobs:
           mvn test
 
   snyk:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
