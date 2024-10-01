@@ -27,6 +27,20 @@ jobs:
           cd back-end
           mvn clean install
 
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+
       - name: Run Maven tests
         run: |
           cd back-end
