@@ -7,6 +7,8 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,6 +17,7 @@ import javax.annotation.Resource;
  * 基础前端接口
  */
 @RestController
+@Api(tags = "Fundamental")
 public class WebController {
 
     @Resource
@@ -29,6 +32,7 @@ public class WebController {
      * 登录
      */
     @PostMapping("/login")
+    @ApiOperation("Login")
     public Result login(@RequestBody Account account) {
         if (ObjectUtil.isEmpty(account.getUsername()) || ObjectUtil.isEmpty(account.getPassword())
                 || ObjectUtil.isEmpty(account.getRole())) {
@@ -44,6 +48,7 @@ public class WebController {
      * 注册
      */
     @PostMapping("/register")
+    @ApiOperation("Register")
     public Result register(@RequestBody Account account) {
         if (StrUtil.isBlank(account.getUsername()) || StrUtil.isBlank(account.getPassword())
                 || ObjectUtil.isEmpty(account.getRole())) {
@@ -59,6 +64,7 @@ public class WebController {
      * 修改密码
      */
     @PutMapping("/updatePassword")
+    @ApiOperation("Update Password")
     public Result updatePassword(@RequestBody Account account) {
         if (StrUtil.isBlank(account.getUsername()) || StrUtil.isBlank(account.getPassword())
                 || ObjectUtil.isEmpty(account.getNewPassword())) {
