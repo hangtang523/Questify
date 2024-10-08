@@ -5,7 +5,7 @@ FROM node:18 AS build
 WORKDIR /app
 
 # 复制依赖文件
-COPY front-end/package*.json ./
+COPY package*.json ./
 
 # 安装依赖
 RUN npm install
