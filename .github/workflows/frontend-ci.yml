@@ -30,3 +30,38 @@ jobs:
         run: |
           cd front-end
           npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'  # 仅在 main 分支上执行部署
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install SSH client
+        run: sudo apt-get install -y sshpass
+
+      - name: Deploy to Remote Server
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          # 将私钥添加到 SSH agent
+          echo "$SSH_PRIVATE_KEY" > id_rsa
+          chmod 600 id_rsa
+        
+          # SSH 连接并在远程服务器上执行命令
+          ssh -i id_rsa -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
+          
+          # 进入到部署的工作目录
+          cd /home/SE5006/questify  # 使用服务器上项目的实际路径
+
+          # 停止旧的容器
+          docker-compose down
+
+          # 使用 docker-compose 构建和启动新容器
+          docker-compose up -d --build
+          EOF
