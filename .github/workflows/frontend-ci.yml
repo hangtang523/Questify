@@ -43,6 +43,21 @@ jobs:
       - name: Install SSH client
         run: sudo apt-get install -y sshpass
 
+      - name: Login to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - name: Build Docker Image
+        run: |
+          docker build -t hangtang/questify/frontend ./front-end  # 替换为实际的 Docker Hub 用户名和镜像名
+
+      - name: Push Docker Image
+        run: |
+          docker push hangtang/questify/frontend  # 替换为实际的 Docker Hub 用户名和镜像名
+
       - name: Deploy to Remote Server
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -58,7 +73,13 @@ jobs:
           
           # 进入到部署的工作目录
           cd /home/SE5006/questify  # 使用服务器上项目的实际路径
-
+          
+          # 拉取前端镜像
+          docker pull hangtang/questify/frontend
+  
+          # 拉取后端镜像
+          docker pull hangtang/questify/backend
+          
           # 停止旧的容器
           docker-compose down
 
