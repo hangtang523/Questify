@@ -70,10 +70,10 @@ jobs:
           cd /home/SE5006/questify  # 使用服务器上项目的实际路径
           
           # 拉取前端镜像
-          docker pull ${{ secrets.DOCKER_USERNAME }}/questify/frontend
+          docker pull ${{ secrets.DOCKER_USERNAME }}/questify-frontend
   
           # 拉取后端镜像
-          docker pull ${{ secrets.DOCKER_USERNAME }}/questify/backend
+          docker pull ${{ secrets.DOCKER_USERNAME }}/questify-backend
           
           # 停止旧的容器
           docker-compose down
