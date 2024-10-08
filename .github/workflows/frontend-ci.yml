@@ -52,11 +52,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t hangtang/questify/frontend ./front-end  # 替换为实际的 Docker Hub 用户名和镜像名
+          docker build -t $DOCKER_USERNAME/questify/frontend ./front-end  # 替换为实际的 Docker Hub 用户名和镜像名
 
       - name: Push Docker Image
         run: |
-          docker push hangtang/questify/frontend  # 替换为实际的 Docker Hub 用户名和镜像名
+          docker push $DOCKER_USERNAME/questify/frontend  # 替换为实际的 Docker Hub 用户名和镜像名
 
       - name: Deploy to Remote Server
         env:
@@ -75,10 +75,10 @@ jobs:
           cd /home/SE5006/questify  # 使用服务器上项目的实际路径
           
           # 拉取前端镜像
-          docker pull hangtang/questify/frontend
+          docker pull $DOCKER_USERNAME/questify/frontend
   
           # 拉取后端镜像
-          docker pull hangtang/questify/backend
+          docker pull $DOCKER_USERNAME/questify/backend
           
           # 停止旧的容器
           docker-compose down
