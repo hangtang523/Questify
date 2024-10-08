@@ -11,7 +11,7 @@ COPY front-end/package*.json ./
 RUN npm install
 
 # 复制其余的应用代码并构建
-COPY front-end ./
+COPY . .
 RUN npm run build
 
 # 第二阶段：使用 Nginx 提供服务
