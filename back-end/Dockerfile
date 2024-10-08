@@ -5,10 +5,10 @@ FROM maven:3.8.6-openjdk-8 AS build
 WORKDIR /app
 
 # 复制 pom.xml
-COPY back-end/pom.xml ./
+COPY pom.xml ./
 
 # 复制其他源代码
-COPY back-end/src ./src
+COPY src ./src
 
 # 构建项目
 RUN mvn clean package -DskipTests
