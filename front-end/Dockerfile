@@ -18,7 +18,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # 复制 Nginx 配置文件到镜像中
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # 复制构建后的文件到 Nginx 的文档根目录
 COPY --from=build /app/dist /usr/share/nginx/html
