@@ -99,12 +99,12 @@ jobs:
           # 将私钥添加到 SSH agent
           echo "$SSH_PRIVATE_KEY" > id_rsa
           chmod 600 id_rsa
-
-          # SSH 连接并在远程服务器上执行命令
-          ssh -i id_rsa -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
           
           # 使用 scp 将 docker-compose.yml 复制到远程服务器
           scp -i id_rsa -o StrictHostKeyChecking=no docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/
+
+          # SSH 连接并在远程服务器上执行命令
+          ssh -i id_rsa -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
 
           # 进入到部署的工作目录
           cd /home/SE5006/questify  # 使用服务器上项目的实际路径
