@@ -4,9 +4,11 @@ FROM maven:3.8.6-openjdk-8 AS build
 # 设置工作目录
 WORKDIR /app
 
-# 复制 pom.xml 和源代码到容器
-COPY pom.xml .
-COPY src ./src
+# 复制 pom.xml
+COPY back-end/pom.xml ./
+
+# 复制其他源代码
+COPY back-end/src ./src
 
 # 构建项目
 RUN mvn clean package -DskipTests
