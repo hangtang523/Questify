@@ -63,8 +63,10 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > id_rsa
           chmod 600 id_rsa
           
-          # 使用 scp 将 docker-compose.yml 复制到远程服务器
+          # 使用 scp 将 docker-compose.yml Dockerfile复制到远程服务器
           scp -i id_rsa -o StrictHostKeyChecking=no docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/
+          scp -i id_rsa -o StrictHostKeyChecking=no ./back-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/back-end/
+          scp -i id_rsa -o StrictHostKeyChecking=no ./front-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/front-end/
         
           # SSH 连接并在远程服务器上执行命令
           ssh -i id_rsa -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
