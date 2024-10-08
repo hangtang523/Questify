@@ -84,5 +84,5 @@ jobs:
           docker-compose down
 
           # 使用 docker-compose 构建和启动新容器
-          docker-compose up -d --build
+          docker-compose up -d 
           EOF
