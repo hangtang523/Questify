@@ -2,14 +2,12 @@ version: '3'
 
 services:
   frontend:
-    build: ./front-end
     ports:
       - "80:80"
     depends_on:
       - backend
 
   backend:
-    build: ./back-end
     ports:
       - "8080:9090"  # 映射主机的 8080 端口到容器的 9090 端口
     environment:
