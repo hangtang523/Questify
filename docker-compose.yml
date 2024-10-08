@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./front-end
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./back-end
+    ports:
+      - "8080:9090"  # 映射主机的 8080 端口到容器的 9090 端口
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/questify  # 连接 MySQL 数据库
+      SPRING_DATASOURCE_USERNAME: root  # 数据库用户名
+      SPRING_DATASOURCE_PASSWORD: root  # 数据库密码
+    depends_on:
+      - mysql  # 确保后端在 MySQL 之前启动
+
+  mysql:
+    image: mysql:8.0  # 使用 MySQL 官方镜像
+    environment:
+      MYSQL_DATABASE: questify  # 创建的数据库名称
+      MYSQL_ROOT_PASSWORD: root  # 设置 root 用户的密码
+    ports:
+      - "3306:3306"  # 映射主机的 3306 端口到容器的 3306 端口
+    volumes:
+      - mysql-data:/var/lib/mysql  # 持久化数据
+
+volumes:
+  mysql-data:

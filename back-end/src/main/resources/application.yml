@@ -1,5 +1,5 @@
 spring:
   application:
-    name: psi-system
+    name: Questify
   profiles:
     active: dev
