@@ -2,12 +2,14 @@ version: '3'
 
 services:
   frontend:
+    image: hangtang/questify-frontend
     ports:
       - "80:80"
     depends_on:
       - backend
 
   backend:
+    image: hangtang/questify-backend
     ports:
       - "8080:9090"  # 映射主机的 8080 端口到容器的 9090 端口
     environment:
