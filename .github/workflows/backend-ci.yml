@@ -104,8 +104,6 @@ jobs:
           scp -i id_rsa -o StrictHostKeyChecking=no docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/
           scp -i id_rsa -o StrictHostKeyChecking=no ./back-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/back-end/
           scp -i id_rsa -o StrictHostKeyChecking=no ./front-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/front-end/
-          scp -i id_rsa -o StrictHostKeyChecking=no -r ./back-end/src $SSH_USERNAME@$SSH_HOST:/path/to/your/project/back-end/
-          scp -i id_rsa -o StrictHostKeyChecking=no ./back-end/pom.xml $SSH_USERNAME@$SSH_HOST:/path/to/your/project/back-end/
 
           # SSH 连接并在远程服务器上执行命令
           ssh -i id_rsa -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
