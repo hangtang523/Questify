@@ -1,21 +1,27 @@
-# 使用 Nginx 基础镜像
-FROM nginx:alpine
+# 第一阶段：构建前端应用
+FROM node:18 AS build
 
-# 设置工作目录（可选）
-WORKDIR /usr/share/nginx/html
+# 设置工作目录
+WORKDIR /app
+
+# 复制依赖文件
+COPY front-end/package*.json ./
+
+# 安装依赖
+RUN npm install
+
+# 复制其余的应用代码并构建
+COPY front-end ./
+RUN npm run build
+
+# 第二阶段：使用 Nginx 提供服务
+FROM nginx:alpine
 
 # 复制 Nginx 配置文件到镜像中
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# 复制构建后的前端文件到 Nginx 的文档根目录
-COPY dist /usr/share/nginx/html
-
-# 设置环境变量（可选）
-ENV NODE_ENV=production
-
-# 添加健康检查（可选）
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost/ || exit 1
+# 复制构建后的文件到 Nginx 的文档根目录
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # 暴露 Nginx 的 80 端口
 EXPOSE 80
