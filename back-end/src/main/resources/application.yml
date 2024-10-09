@@ -1,5 +1,5 @@
 spring:
   application:
-    name: Questify
+    name: questify
   profiles:
     active: dev
