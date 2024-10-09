@@ -1,0 +1,41 @@
+---
+- name: Deploy application using Docker
+  hosts: "{{ target_host }}"  # 动态传递服务器信息
+  become: yes  # 获取 sudo 权限
+
+  tasks:
+    - name: Ensure docker is installed
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Ensure docker-compose is installed
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Pull latest frontend and backend Docker images
+      shell: |
+        docker pull {{ docker_username }}/questify-frontend
+        docker pull {{ docker_username }}/questify-backend
+
+    - name: Copy docker-compose.yml to server
+      copy:
+        src: ./docker-compose.yml
+        dest: /home/SE5006/questify/docker-compose.yml
+
+    - name: Copy frontend Dockerfile to server
+      copy:
+        src: ./front-end/Dockerfile
+        dest: /home/SE5006/questify/front-end/Dockerfile
+
+    - name: Copy backend Dockerfile to server
+      copy:
+        src: ./back-end/Dockerfile
+        dest: /home/SE5006/questify/back-end/Dockerfile
+
+    - name: Restart application using docker-compose
+      shell: |
+        cd /home/SE5006/questify
+        docker-compose down
+        docker-compose up -d

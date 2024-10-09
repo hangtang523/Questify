@@ -86,40 +86,54 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - name: Build Image
+        run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/questify-backend ./back-end  # 替换为实际的 Docker Hub 用户名和镜像名
+
+      - name: Push Image
+        run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/questify-backend # 替换为实际的 Docker Hub 用户名和镜像名
 
-      - name: Deploy to Remote Server
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+#      - name: Deploy to Remote Server
+#        env:
+#          SSH_HOST: ${{ secrets.SSH_HOST }}
+#          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+#        run: |
+#          # 将私钥添加到 SSH agent
+#          echo "$SSH_PRIVATE_KEY" > id_rsa
+#          chmod 600 id_rsa
+#
+#          # 使用 scp 将 docker-compose.yml Dockerfile复制到远程服务器
+#          scp -i id_rsa -o StrictHostKeyChecking=no docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/
+#          scp -i id_rsa -o StrictHostKeyChecking=no ./back-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/back-end/
+#          scp -i id_rsa -o StrictHostKeyChecking=no ./front-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/front-end/
+#
+#          # SSH 连接并在远程服务器上执行命令
+#          ssh -i id_rsa -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
+#
+#          # 进入到部署的工作目录
+#          cd /home/SE5006/questify  # 使用服务器上项目的实际路径
+#
+#          # 拉取前端镜像
+#          docker pull ${{ secrets.DOCKER_USERNAME }}/questify-frontend
+#
+#          # 拉取后端镜像
+#          docker pull ${{ secrets.DOCKER_USERNAME }}/questify-backend
+#
+#          # 停止旧的容器
+#          docker-compose down
+#
+#          # 使用 docker-compose 构建和启动新容器
+#          docker-compose up -d
+#          EOF
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Run Ansible Playbook
         run: |
-          # 将私钥添加到 SSH agent
-          echo "$SSH_PRIVATE_KEY" > id_rsa
-          chmod 600 id_rsa
-          
-          # 使用 scp 将 docker-compose.yml Dockerfile复制到远程服务器
-          scp -i id_rsa -o StrictHostKeyChecking=no docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/
-          scp -i id_rsa -o StrictHostKeyChecking=no ./back-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/back-end/
-          scp -i id_rsa -o StrictHostKeyChecking=no ./front-end/Dockerfile $SSH_USERNAME@$SSH_HOST:/home/SE5006/questify/front-end/
-
-          # SSH 连接并在远程服务器上执行命令
-          ssh -i id_rsa -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST << 'EOF'
-
-          # 进入到部署的工作目录
-          cd /home/SE5006/questify  # 使用服务器上项目的实际路径
-          
-          # 拉取前端镜像
-          docker pull ${{ secrets.DOCKER_USERNAME }}/questify-frontend
-          
-          # 拉取后端镜像
-          docker pull ${{ secrets.DOCKER_USERNAME }}/questify-backend
-          
-          # 停止旧的容器
-          docker-compose down
-
-          # 使用 docker-compose 构建和启动新容器
-          docker-compose up -d 
-          EOF
+          ansible-playbook -i ${{ secrets.SSH_HOST }}, -u ${{ secrets.SSH_USERNAME }} deploy.yml --extra-vars "docker_username=${{ secrets.DOCKER_USERNAME }}"
