@@ -33,17 +33,17 @@
 
     - name: Copy docker-compose.yml to server
       copy:
-        src: ../docker-compose.yml
+        src: ../../docker-compose.yml
         dest: /home/SE5006/questify/docker-compose.yml
 
     - name: Copy frontend Dockerfile to server
       copy:
-        src: ../front-end/Dockerfile
+        src: ../../front-end/Dockerfile
         dest: /home/SE5006/questify/front-end/Dockerfile
 
     - name: Copy backend Dockerfile to server
       copy:
-        src: ../back-end/Dockerfile
+        src: ../../back-end/Dockerfile
         dest: /home/SE5006/questify/back-end/Dockerfile
 
     - name: Restart application using docker-compose
