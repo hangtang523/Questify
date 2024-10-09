@@ -16,8 +16,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/questify  # 连接 MySQL 数据库
       SPRING_DATASOURCE_USERNAME: root  # 数据库用户名
       SPRING_DATASOURCE_PASSWORD: root  # 数据库密码
+      FILE_UPLOAD_PATH: /app/files/  # 指定容器内的上传路径
     depends_on:
       - mysql  # 确保后端在 MySQL 之前启动
+    volumes:
+      - ./files/:/app/files/
 
   mysql:
     image: mysql:8.0  # 使用 MySQL 官方镜像
