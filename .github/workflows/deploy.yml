@@ -13,7 +13,7 @@
       apt:
         name: docker.io
         state: present
-        when: docker_version.rc != 0  # 仅当 Docker 未安装时才执行
+      when: docker_version.rc != 0  # 仅当 Docker 未安装时才执行
 
     - name: Check if Docker Compose is installed
       command: docker-compose --version
@@ -24,7 +24,7 @@
       apt:
         name: docker-compose
         state: present
-        when: compose_version.rc != 0  # 仅当 Docker Compose 未安装时才执行
+      when: compose_version.rc != 0  # 仅当 Docker Compose 未安装时才执行
 
     - name: Pull latest frontend and backend Docker images
       shell: |
