@@ -52,7 +52,7 @@ jobs:
 
       - name: Build Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/questify-frontend ./frontend  # 替换为实际的 Docker Hub 用户名和镜像名
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/questify-frontend ./front-end  # 替换为实际的 Docker Hub 用户名和镜像名
 
       - name: Push Image
         run: |
