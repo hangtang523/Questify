@@ -26,7 +26,7 @@ public class FileController {
     // 文件上传存储路径
     private static final String filePath = System.getProperty("user.dir") + "/files/";
 
-    @Value("${server.port:9090}")
+    @Value("${port:9090}")
     private String port;
 
     @Value("${ip:localhost}")

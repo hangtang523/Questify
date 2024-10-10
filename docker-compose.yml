@@ -3,6 +3,8 @@ version: '3'
 services:
   frontend:
     image: hangtang/questify-frontend
+    networks:
+      - my-network
     ports:
       - "80:80"
     depends_on:
@@ -25,7 +27,7 @@ services:
       - ./files/:/app/files/
 
   mysql:
-    image: mysql:5.7.22  # 使用 MySQL 官方镜像
+    image: mysql:8.0  # 使用 MySQL 官方镜像
     networks:
       - my-network
     environment:

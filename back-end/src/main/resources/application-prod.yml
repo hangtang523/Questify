@@ -28,4 +28,5 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
-ip: localhost
+ip: 146.190.99.83
+port: 8080
