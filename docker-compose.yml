@@ -10,6 +10,8 @@ services:
 
   backend:
     image: hangtang/questify-backend
+    networks:
+      - my-network
     ports:
       - "8080:9090"  # 映射主机的 8080 端口到容器的 9090 端口
     environment:
@@ -23,7 +25,9 @@ services:
       - ./files/:/app/files/
 
   mysql:
-    image: mysql:8.0  # 使用 MySQL 官方镜像
+    image: mysql:5.7.22  # 使用 MySQL 官方镜像
+    networks:
+      - my-network
     environment:
       MYSQL_DATABASE: questify  # 创建的数据库名称
       MYSQL_ROOT_PASSWORD: root  # 设置 root 用户的密码
@@ -31,6 +35,7 @@ services:
       - "3306:3306"  # 映射主机的 3306 端口到容器的 3306 端口
     volumes:
       - mysql-data:/var/lib/mysql  # 持久化数据
-
+networks:
+  my-network:
 volumes:
   mysql-data:
