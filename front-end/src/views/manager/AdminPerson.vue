@@ -5,7 +5,7 @@
         <div style="margin: 15px; text-align: center">
           <el-upload
               class="avatar-uploader"
-              :action="$baseUrl + '/files/upload'"
+              :action="$baseAPI + '/files/upload'"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
           >
@@ -38,7 +38,9 @@ export default {
   name: "AdminPerson",
   data() {
     return {
-      user: JSON.parse(localStorage.getItem('xm-user') || '{}')
+      user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
+      // 根据环境设置 baseAPI
+      baseAPI: process.env.VUE_APP_BASE_API
     }
   },
   created() {
