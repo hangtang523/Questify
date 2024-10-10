@@ -5,7 +5,7 @@
         <div style="margin: 15px; text-align: center">
           <el-upload
               class="avatar-uploader"
-              :action="$baseAPI + '/files/upload'"
+              :action="baseAPI + '/files/upload'"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
           >
