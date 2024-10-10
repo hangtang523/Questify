@@ -49,7 +49,6 @@
         select * from user where id = #{id}
     </select>
 
-
     <insert id="insert" parameterType="com.example.entity.User" useGeneratedKeys="true">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
