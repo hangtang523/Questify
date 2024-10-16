@@ -22,7 +22,8 @@ const routes = [
       { path: 'adminPerson', name: 'AdminPerson', meta: { name: 'Profile' }, component: () => import('../views/manager/AdminPerson') },
       { path: 'password', name: 'Password', meta: { name: 'Reset Password' }, component: () => import('../views/manager/Password') },
       { path: 'notice', name: 'Notice', meta: { name: 'Announcement Management' }, component: () => import('../views/manager/Notice') },
-      { path: 'user', name: 'User', meta: { name: '用户信息' }, component: () => import('../views/manager/User') },
+      { path: 'user', name: 'User', meta: { name: 'User Inforamtion' }, component: () => import('../views/manager/User') },
+      { path: 'pages', name: 'Pages', meta: { name: 'Pages Inforamtion' }, component: () => import('../views/manager/Pages') },
     ]
   },
   {
