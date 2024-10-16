@@ -1,59 +1,95 @@
-.front-notice {
-    padding: 5px 20px;
-    color: #666;
-    font-size: 12px
+/* 通用字体和颜色设置 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8; /* 页面背景颜色 */
 }
+
+/* 通知样式 */
+.front-notice {
+    padding: 10px 20px;
+    color: #4a4a4a; /* 调整字体颜色 */
+    font-size: 14px; /* 调整字体大小 */
+    background-color: #d1e7dd; /* 背景颜色，淡绿色 */
+    border-left: 4px solid #0f6e8b; /* 左侧边框，深青色 */
+    margin-bottom: 10px; /* 底部间距 */
+}
+
+/* 页眉样式 */
 .front-header {
     display: flex;
-    height: 60px;
-    line-height: 60px;
-    border-bottom: 1px solid #eee;
-    background: white;
+    height: 70px; /* 增加高度 */
+    line-height: 70px;
+    border-bottom: 2px solid #b0c4de; /* 增加边框宽度，使用浅蓝色 */
+    background: #ffffff; /* 背景颜色 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
 }
+
+/* 页眉左侧样式 */
 .front-header-left {
     width: 350px;
     display: flex;
     align-items: center;
     padding-left: 30px;
 }
-.front-header-left img, .front-header-dropdown img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%
+
+/* 图片样式 */
+.front-header-left img,
+.front-header-dropdown img {
+    width: 45px; /* 稍微增大图标 */
+    height: 45px; /* 稍微增大图标 */
+    border-radius: 50%;
 }
+
+/* 标题样式 */
 .front-header-left .title {
     flex: 1;
-    color: #355476;
+    color: #007bff; /* 标题颜色，蓝色 */
     cursor: pointer;
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 22px; /* 调整字体大小 */
     font-weight: bold;
 }
+
+/* 中间部分样式 */
 .front-header-center {
     flex: 1;
 }
+
+/* 右侧部分样式 */
 .front-header-right {
     width: 200px;
     padding-right: 20px;
     text-align: right;
 }
+
+/* 下拉菜单样式 */
 .front-header-dropdown {
     display: flex;
     align-items: center;
-    justify-content: right;
-}
-.el-dropdown-menu {
-    width: 100px !important;
-    text-align: center !important;
+    justify-content: flex-end; /* 使用 flex-end 对齐 */
 }
 
-/*页面具体样式自定义*/
+/* 下拉菜单具体样式 */
+.el-dropdown-menu {
+    width: 120px !important; /* 增加下拉菜单宽度 */
+    text-align: center !important;
+    border-radius: 4px; /* 圆角 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    background-color: #ffffff; /* 下拉菜单背景颜色 */
+}
+
+/* 内容区域样式 */
 .main-content {
     width: 100%;
-    margin: 5px auto;
+    margin: 10px auto; /* 增加顶部和底部的间距 */
+    padding: 20px; /* 增加内边距 */
+    background-color: #ffffff; /* 内容背景颜色 */
+    border-radius: 8px; /* 圆角效果 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
 }
+
 /* ElementUI 样式覆盖 */
 .el-menu.el-menu--horizontal {
     border: none !important;
-    height: 59px;
+    height: 60px; /* 确保高度一致 */
 }

@@ -83,9 +83,15 @@ export default {
     };
   },
   methods: {
-    update() {
+    update() {//个人信息更改 要先判断是用户还是管理员
+      let url;
+      if(this.user.role==='ADMIN'){
+        url = '/admin/update';
+      }else{
+        url = '/user/update';
+      }
       // Save the current user information to the database
-      this.$request.put('/admin/update', this.user).then(res => {
+      this.$request.put(url, this.user).then(res => {
         if (res.code === '200') {
           this.$message.success('Save successful');
           localStorage.setItem('xm-user', JSON.stringify(this.user));
@@ -96,8 +102,9 @@ export default {
       });
     },
     handleAvatarSuccess(response, file, fileList) {
-      this.$set(this.user, 'avatar', response.data);
+      this.$set(this.user, 'avatar', response.data)
     },
+
     updatePassword() {
       this.dialogVisible = true;
     },
