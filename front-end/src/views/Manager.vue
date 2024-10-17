@@ -50,6 +50,7 @@
               <i class="el-icon-menu"></i><span>User Management</span>
             </template>
             <el-menu-item index="/admin">Admin Management</el-menu-item>
+            <el-menu-item index="/user">User Management</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
