@@ -1,7 +1,11 @@
 package com.example.service;
 
+import cn.hutool.core.date.DateUtil;
+import com.example.common.enums.RoleEnum;
+import com.example.entity.Account;
 import com.example.entity.Pages;
 import com.example.mapper.PagesMapper;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -23,7 +27,16 @@ public class PagesService {
     /**
      * 新增
      */
+
+    /**
+     * 新增
+     */
     public void add(Pages pages) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        if (RoleEnum.USER.name().equals(currentUser.getRole())) {
+            pages.setUserId(currentUser.getId());
+        }
+        pages.setCreateTime(DateUtil.now());
         pagesMapper.insert(pages);
     }
 

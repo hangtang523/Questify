@@ -27,14 +27,14 @@ public class Pages implements Serializable {
     /** 是否发布 */
     private String saved;
 
-    private String username;
+    private String userName;
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public Integer getId() {

@@ -43,7 +43,7 @@
                 <i class="el-icon-menu"></i><span>Infor Management</span>
               </template>
                 <el-menu-item index="/notice">Notice Management</el-menu-item>
-                <el-menu-item index="/pages">问卷管理</el-menu-item>
+                <el-menu-item index="/pages">Pages Management</el-menu-item>
 
           </el-submenu>
           <el-submenu index="user">
