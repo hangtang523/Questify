@@ -17,7 +17,7 @@ Vue.prototype.$baseUrl = process.env.VUE_APP_BASEURL
 // 统一使用 Element UI
 Vue.use(ElementUI, {
     size: "small", // 设置全局组件的尺寸
-    locale: locale //  设置语言
+    locale: locale // 设置语言
 });
 
 new Vue({
