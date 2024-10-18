@@ -43,15 +43,11 @@ This on-line questionnaire survey ans management system is to provide an efficie
 - [x] Project Initialization
 - [x] Fundamental Functionality (e.g. Login and File Uploading)
 - [x] Admin Management
-- [x] Notice Management
-- [x] CI/CD Workflows
+- [ ] Notice Management
+- [ ] CI/CD Workflows
     - [x] Build
-    - [x] Test
-    - [x] Deploy
-
-### Sprint 1
-
-
+    - [ ] Test
+    - [ ] Deploy
 
 ## Authors
 

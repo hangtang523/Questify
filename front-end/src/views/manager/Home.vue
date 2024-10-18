@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card" style="padding: 15px">
-      Hello，{{ user?.name }}！Welcome to use Questify
+      Hello，{{ user.name }}！Welcome to use Questify
     </div>
 
     <div style="display: flex; margin: 10px 0">

@@ -38,19 +38,23 @@
             <i class="el-icon-s-home"></i>
             <span slot="title">Dashboard</span>
           </el-menu-item>
-<!--          <el-submenu index="info">-->
-            <el-menu-item index="/notice">
+          <el-submenu index="info">
               <template slot="title">
-                <i class="el-icon-menu"></i><span>Announcement</span>
+                <i class="el-icon-menu"></i><span>Infor Management</span>
               </template>
-             </el-menu-item>
-<!--          </el-submenu>-->
+                <el-menu-item index="/notice">Notice Management</el-menu-item>
+                <el-menu-item index="/pages">Pages Management</el-menu-item>
+                <el-menu-item index="/question">Question Information</el-menu-item>
+                <el-menu-item index="/questionItem">Question Content</el-menu-item>
+          </el-submenu>
           <el-submenu index="user">
             <template slot="title">
               <i class="el-icon-menu"></i><span>User Management</span>
+
             </template>
             <el-menu-item index="/admin">Admin Management</el-menu-item>
             <el-menu-item index="/user">User Management</el-menu-item>
+
           </el-submenu>
         </el-menu>
       </div>
