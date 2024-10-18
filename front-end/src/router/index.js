@@ -24,6 +24,8 @@ const routes = [
       { path: 'notice', name: 'Notice', meta: { name: 'Announcement Management' }, component: () => import('../views/manager/Notice') },
       { path: 'user', name: 'User', meta: { name: 'User Inforamtion' }, component: () => import('../views/manager/User') },
       { path: 'pages', name: 'Pages', meta: { name: 'Pages Inforamtion' }, component: () => import('../views/manager/Pages') },
+      { path: 'question', name: 'Question', meta: { name: 'Question Inforamtion' }, component: () => import('../views/manager/Question') },
+      { path: 'questionItem', name: 'QuestionItem', meta: { name: 'Question Content' }, component: () => import('../views/manager/QuestionItem') },
     ]
   },
   {
