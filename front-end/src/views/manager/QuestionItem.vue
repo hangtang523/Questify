@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="Please enter name to query " style="width: 200px; margin-right: 10px" v-model="name"></el-input>
-
-      <el-button type="info" plain style="margin-left: 10px" @click="load(1)">Query</el-button>
+      <el-input placeholder="Please enter a name to search" style="width: 200px" v-model="content"></el-input>
+      <el-button type="info" plain style="margin-left: 10px" @click="load(1)">Enqury</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">Reset</el-button>
     </div>
 
@@ -16,25 +15,12 @@
       <el-table :data="tableData" strip @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
         <el-table-column prop="id" label="id" width="70" align="center" sortable></el-table-column>
-        <el-table-column prop="name" label="Template Name"></el-table-column>
-        <el-table-column prop="descr" label="Template Description"></el-table-column>
-        <el-table-column prop="img" label="Cover">
+        <el-table-column prop="content" label="content"></el-table-column>
+        <el-table-column prop="questionId" label="questionId"></el-table-column>
+        <el-table-column prop="questionName" label="questionName"></el-table-column>
+        <el-table-column label="Action" align="center" width="180">
           <template v-slot="scope">
-            <div style="display: flex; align-items: center">
-              <el-image style="width: 50px; height: 50px; " v-if="scope.row.img"
-                        :src="scope.row.img" :preview-src-list="[scope.row.img]"></el-image>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="count" label="Used times"></el-table-column>
-        <el-table-column prop="userId" label="Creator ID"></el-table-column>
-        <el-table-column prop="username" label="Creator "></el-table-column>
-        <el-table-column prop="createTime" label="Create time"></el-table-column>
-        <el-table-column prop="open" label="Public"></el-table-column>
-        <el-table-column prop="saved" label="Publish"></el-table-column>
-        <el-table-column label="Actions" align="center" width="180">
-          <template v-slot="scope">
-            <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Edit</el-button>
+            <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Editor</el-button>
             <el-button size="mini" type="danger" plain @click="del(scope.row.id)">Delete</el-button>
           </template>
         </el-table-column>
@@ -56,32 +42,16 @@
 
     <el-dialog title="Information" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
-        <el-form-item label="Name" prop="name">
-          <el-input v-model="form.name" placeholder="Name"></el-input>
+        <el-form-item label="content" prop="content">
+          <el-input v-model="form.content" placeholder="内容"></el-input>
         </el-form-item>
-        <el-form-item label="Description" prop="descr">
-          <el-input v-model="form.descr" placeholder="Description"></el-input>
-        </el-form-item>
-        <el-form-item label="Cover" prop="img">
-          <el-upload
-              :action="$baseUrl + '/files/upload'"
-              :headers="{ token: user.token }"
-              list-type="picture"
-              :on-success="handleImgSuccess"
-          >
-            <el-button type="primary">upload</el-button>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="public" prop="open">
-          <el-radio-group v-model="form.open">
-            <el-radio label="Yes"></el-radio>
-            <el-radio label="No"></el-radio>
-          </el-radio-group>
+        <el-form-item label="questionId" prop="questionId">
+          <el-input v-model="form.questionId" placeholder="questionId"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="fromVisible = false">cancel</el-button>
-        <el-button type="primary" @click="save">confirm</el-button>
+        <el-button @click="fromVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="save">Confirm</el-button>
       </div>
     </el-dialog>
 
@@ -91,25 +61,19 @@
 
 <script>
 export default {
-  name: "Pages",
+  name: "QuestionItem",
   data() {
     return {
       tableData: [],  // 所有的数据
       pageNum: 1,   // 当前的页码
       pageSize: 10,  // 每页显示的个数
       total: 0,
-      name: null,
-      userName: null,
+      content: null,
       fromVisible: false,
       form: {},
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
       rules: {
-        name: [
-          {required: true, message: 'please enter name', trigger: 'blur'},
-        ],
-        descr: [
-          {required: true, message: 'please enter description', trigger: 'blur'},
-        ]
+
       },
       ids: []
     }
@@ -130,12 +94,12 @@ export default {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.$request({
-            url: this.form.id ? '/pages/update' : '/pages/add',
+            url: this.form.id ? '/questionItem/update' : '/questionItem/add',
             method: this.form.id ? 'PUT' : 'POST',
             data: this.form
           }).then(res => {
             if (res.code === '200') {  // 表示成功保存
-              this.$message.success('save successful')
+              this.$message.success('save success')
               this.load(1)
               this.fromVisible = false
             } else {
@@ -146,10 +110,10 @@ export default {
       })
     },
     del(id) {   // 单个删除
-      this.$confirm('Are you sure you want to delete?', 'Yes', {type: "warning"}).then(response => {
-        this.$request.delete('/pages/delete/' + id).then(res => {
+      this.$confirm('Are you sure you want to delete it?？', 'confirm delete', {type: "warning"}).then(response => {
+        this.$request.delete('/questionItem/delete/' + id).then(res => {
           if (res.code === '200') {   // 表示操作成功
-            this.$message.success('Successful operation')
+            this.$message.success('success')
             this.load(1)
           } else {
             this.$message.error(res.msg)  // 弹出错误的信息
@@ -163,13 +127,13 @@ export default {
     },
     delBatch() {   // 批量删除
       if (!this.ids.length) {
-        this.$message.warning('Please choose data')
+        this.$message.warning('please choose data')
         return
       }
-      this.$confirm('Are you sure you want to bulk delete this data?？', 'confirm delete', {type: "warning"}).then(response => {
-        this.$request.delete('/pages/delete/batch', {data: this.ids}).then(res => {
+      this.$confirm('Are you sure you want to delete these items in batch?', 'confirm delete', {type: "warning"}).then(response => {
+        this.$request.delete('/questionItem/delete/batch', {data: this.ids}).then(res => {
           if (res.code === '200') {   // 表示操作成功
-            this.$message.success('successful operation')
+            this.$message.success('success')
             this.load(1)
           } else {
             this.$message.error(res.msg)  // 弹出错误的信息
@@ -180,12 +144,11 @@ export default {
     },
     load(pageNum) {  // 分页查询
       if (pageNum) this.pageNum = pageNum
-      this.$request.get('/pages/selectPage', {
+      this.$request.get('/questionItem/selectPage', {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          name: this.name,
-          userName: this.userName,
+          content: this.content,
         }
       }).then(res => {
         this.tableData = res.data?.list
@@ -193,16 +156,12 @@ export default {
       })
     },
     reset() {
-      this.name = null
-      this.userName = null
+      this.content = null
       this.load(1)
     },
     handleCurrentChange(pageNum) {
       this.load(pageNum)
     },
-    handleImgSuccess(res) {
-      this.form.img = res.data  // 把后台返回的图片url赋值给表单属性 img
-    }
   }
 }
 </script>
