@@ -37,6 +37,7 @@ services:
       - "3306:3306"  # 映射主机的 3306 端口到容器的 3306 端口
     volumes:
       - mysql-data:/var/lib/mysql  # 持久化数据
+      - ./sql/my.cnf:/etc/my.cnf   # 持久化配置
 networks:
   my-network:
 volumes:
