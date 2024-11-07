@@ -112,4 +112,22 @@ public class QuestionItemServiceTest {
         assertEquals(2, result.getList().size());
         verify(questionItemMapper, times(1)).selectAll(any(QuestionItem.class));
     }
+    @Test
+    public void testSelectByQuestionId() {
+        List<QuestionItem> itemList = Arrays.asList(questionItem1, questionItem2);
+        when(questionItemMapper.selectByQuestionId(1)).thenReturn(itemList);
+
+        List<QuestionItem> result = questionItemService.selectByQuestionId(1);
+
+        assertEquals(2, result.size());
+        verify(questionItemMapper, times(1)).selectByQuestionId(1);
+    }
+
+    @Test
+    public void testDeleteByQuestionId() {
+        // deleteByQuestionId 是 void 方法，不需要 doNothing()
+        questionItemService.deleteByQuestionId(1);
+
+        verify(questionItemMapper, times(1)).deleteByQuestionId(1);
+    }
 }

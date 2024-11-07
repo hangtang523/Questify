@@ -46,7 +46,7 @@
                 <el-menu-item index="/pages">Pages Management</el-menu-item>
                 <el-menu-item index="/question">Question Information</el-menu-item>
                 <el-menu-item index="/questionItem">Question Content</el-menu-item>
-                <el-menu-item index="/answer">答题信息</el-menu-item>
+                <el-menu-item index="/answer">Answer Information</el-menu-item>
 <!--            <el-menu-item index="/logs">操作日志</el-menu-item>-->
           </el-submenu>
           <el-submenu index="user">

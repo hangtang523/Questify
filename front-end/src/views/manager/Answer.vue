@@ -1,30 +1,30 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="请输入问卷名称查询" style="width: 200px; margin-right: 10px" v-model="pageName"></el-input>
-      <el-input placeholder="请输入题目名称查询" style="width: 200px; margin-right: 10px" v-model="questionName"></el-input>
-      <el-input placeholder="请输入内容查询" style="width: 200px" v-model="content"></el-input>
-      <el-button type="info" plain style="margin-left: 10px" @click="load(1)">查询</el-button>
-      <el-button type="warning" plain style="margin-left: 10px" @click="reset">重置</el-button>
+      <el-input placeholder="Please enter the name to search" style="width: 200px; margin-right: 10px" v-model="pageName"></el-input>
+      <el-input placeholder="Please enter the questionName to search" style="width: 200px; margin-right: 10px" v-model="questionName"></el-input>
+      <el-input placeholder="Please enter the content to search" style="width: 200px" v-model="content"></el-input>
+      <el-button type="info" plain style="margin-left: 10px" @click="load(1)">Search</el-button>
+      <el-button type="warning" plain style="margin-left: 10px" @click="reset">Reset</el-button>
     </div>
 
     <div class="operation">
-      <el-button type="danger" plain @click="delBatch">批量删除</el-button>
+      <el-button type="danger" plain @click="delBatch">Batch Delete</el-button>
     </div>
 
     <div class="table">
       <el-table :data="tableData" strip @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
-        <el-table-column prop="id" label="序号" width="70" align="center" sortable></el-table-column>
-        <el-table-column prop="pageName" label="问卷"></el-table-column>
-        <el-table-column prop="pageId" label="问卷ID"></el-table-column>
-        <el-table-column prop="questionName" label="题目"></el-table-column>
-        <el-table-column prop="questionId" label="题目ID"></el-table-column>
-        <el-table-column prop="content" label="内容"></el-table-column>
-        <el-table-column label="操作" align="center" width="180">
+        <el-table-column prop="id" label="id" width="70" align="center" sortable></el-table-column>
+        <el-table-column prop="pageName" label="Name"></el-table-column>
+        <el-table-column prop="pageId" label="QuestionaireID"></el-table-column>
+        <el-table-column prop="questionName" label="questionName"></el-table-column>
+        <el-table-column prop="questionId" label="questionId"></el-table-column>
+        <el-table-column prop="content" label="content"></el-table-column>
+        <el-table-column label="Action" align="center" width="180">
           <template v-slot="scope">
-            <el-button type="primary" plain @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button size="mini" type="danger" plain @click="del(scope.row.id)">删除</el-button>
+            <el-button type="primary" plain @click="handleEdit(scope.row)">Edit</el-button>
+            <el-button size="mini" type="danger" plain @click="del(scope.row.id)">Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -43,25 +43,25 @@
     </div>
 
 
-    <el-dialog title="信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="Information" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
-        <el-form-item label="问卷ID" prop="pageId">
-          <el-input v-model="form.pageId" placeholder="问卷ID"></el-input>
+        <el-form-item label="ID" prop="pageId">
+          <el-input v-model="form.pageId" placeholder="pageId"></el-input>
         </el-form-item>
-        <el-form-item label="题目ID" prop="questionId">
-          <el-input v-model="form.questionId" placeholder="题目ID"></el-input>
+        <el-form-item label="questionId" prop="questionId">
+          <el-input v-model="form.questionId" placeholder="questionId"></el-input>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <el-input v-model="form.content" placeholder="内容"></el-input>
+          <el-input v-model="form.content" placeholder="content"></el-input>
         </el-form-item>
-        <el-form-item label="调查编号" prop="no">
-          <el-input v-model="form.no" placeholder="调查编号"></el-input>
+        <el-form-item label="no" prop="no">
+          <el-input v-model="form.no" placeholder="no"></el-input>
         </el-form-item>
 
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="fromVisible = false">取 消</el-button>
-        <el-button type="primary" @click="save">确 定</el-button>
+        <el-button @click="fromVisible = false">cancel</el-button>
+        <el-button type="primary" @click="save">confirm</el-button>
       </div>
     </el-dialog>
 
@@ -110,7 +110,7 @@ export default {
             data: this.form
           }).then(res => {
             if (res.code === '200') {  // 表示成功保存
-              this.$message.success('保存成功')
+              this.$message.success('save success')
               this.load(1)
               this.fromVisible = false
             } else {
@@ -121,10 +121,10 @@ export default {
       })
     },
     del(id) {   // 单个删除
-      this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
+      this.$confirm('Are you sure you want to delete it?', 'Yes', {type: "warning"}).then(response => {
         this.$request.delete('/answer/delete/' + id).then(res => {
           if (res.code === '200') {   // 表示操作成功
-            this.$message.success('操作成功')
+            this.$message.success('succcess')
             this.load(1)
           } else {
             this.$message.error(res.msg)  // 弹出错误的信息
@@ -138,13 +138,13 @@ export default {
     },
     delBatch() {   // 批量删除
       if (!this.ids.length) {
-        this.$message.warning('请选择数据')
+        this.$message.warning('Please select data')
         return
       }
-      this.$confirm('您确定批量删除这些数据吗？', '确认删除', {type: "warning"}).then(response => {
+      this.$confirm('Are you sure you want to batch delete this data?？', 'yes', {type: "warning"}).then(response => {
         this.$request.delete('/answer/delete/batch', {data: this.ids}).then(res => {
           if (res.code === '200') {   // 表示操作成功
-            this.$message.success('操作成功')
+            this.$message.success('success')
             this.load(1)
           } else {
             this.$message.error(res.msg)  // 弹出错误的信息

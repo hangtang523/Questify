@@ -3,8 +3,8 @@ package com.example.common.enums;
 public enum QuestionTypeEnum {
 
     SINGLE("Single Choice"),
-    MULTIPLE("多选题"),
-    TEXT("填空题");
+    MULTIPLE("Multiple Choice"),
+    TEXT("Blank");
 
     private String value;
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.example.entity.Question;
+import com.example.entity.QuestionItem;
 import com.example.mapper.QuestionMapper;
 import com.example.service.QuestionService;
 import com.example.service.QuestionItemService;
@@ -104,5 +105,39 @@ public class QuestionServiceTest {
 
         assertEquals(2, result.getList().size());
         verify(questionMapper, times(1)).selectAll(any(Question.class));
+    }
+    @Test
+    public void testSelectByPageId() {
+        List<Question> questionList = Arrays.asList(question1, question2);
+        when(questionMapper.selectByPageId(1)).thenReturn(questionList);
+
+        List<Question> result = questionService.selectByPageId(1);
+
+        assertEquals(2, result.size());
+        verify(questionMapper, times(1)).selectByPageId(1);
+    }
+    @Test
+    public void testAddForUser() {
+        // 假设 insert 返回 int 类型
+        when(questionMapper.insert(question1)).thenReturn(1);
+
+        questionService.addForUser(question1);
+
+        verify(questionMapper, times(1)).insert(question1);
+        questionItemService.add(new QuestionItem());
+        questionItemService.add(new QuestionItem());
+        verify(questionItemService, times(2)).add(any(QuestionItem.class));
+    }
+
+    @Test
+    public void testDeleteByPageId() {
+        List<Question> questionList = Arrays.asList(question1, question2);
+        when(questionMapper.selectByPageId(1)).thenReturn(questionList);
+
+        questionService.deleteByPageId(1);
+
+        verify(questionMapper, times(1)).deleteByPageId(1);
+        verify(questionItemService, times(1)).deleteByQuestionId(1);
+        verify(questionItemService, times(1)).deleteByQuestionId(2);
     }
 }

@@ -75,4 +75,8 @@ public class AnswerService {
             this.add(answer);
         }
     }
+
+    public List<Answer> selectByPageId(Integer pageId) {
+        return answerMapper.selectByPageId(pageId);
+    }
 }

@@ -15,7 +15,24 @@ public class QuestionItem implements Serializable {
     /** 题目ID */
     private Integer questionId;
     private String questionName;
+    private Long count;
+    private Integer percentage;
 
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
+
+    public Integer getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(Integer percentage) {
+        this.percentage = percentage;
+    }
 
     public String getQuestionName() {
         return questionName;

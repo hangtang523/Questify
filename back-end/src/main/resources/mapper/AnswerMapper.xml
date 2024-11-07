@@ -30,6 +30,12 @@
         from answer
         where id = #{id}
     </select>
+    <select id="selectByPageId" resultType="com.example.entity.Answer">
+        select
+        <include refid="Base_Column_List" />
+        from answer
+        where page_id = #{pageId}
+    </select>
 
     <delete id="deleteById">
         delete from answer

@@ -9,22 +9,22 @@
           <div style="margin-bottom: 10px; font-size: 18px">
             <span>{{ index+1 }}.</span>
             <span style="margin-right: 10px">{{ item.name }}</span>
-            <el-tag v-if="item.type === '单选题'" type="primary">单选题</el-tag>
-            <el-tag v-if="item.type === '多选题'" type="success">多选题</el-tag>
-            <el-tag v-if="item.type === '填空题'" type="warning">填空题</el-tag>
+            <el-tag v-if="item.type === 'Single Choice'" type="primary">Single Choice</el-tag>
+            <el-tag v-if="item.type === 'Multiple Choice'" type="success">Multiple Choice</el-tag>
+            <el-tag v-if="item.type === 'Blank'" type="warning">Blank</el-tag>
           </div>
           <div style="padding-left: 20px"> <!--  遍历内容 -->
-            <el-checkbox-group v-model="item.answer" v-if="item.type === '多选题'">
+            <el-checkbox-group v-model="item.answer" v-if="item.type === 'Multiple Choice'">
               <div v-for="sub in item.questionItemList" :key="sub.id" style="margin-bottom: 5px">
                 <el-checkbox :label="sub.content"></el-checkbox>
               </div>
             </el-checkbox-group>
             <div v-for="sub in item.questionItemList" :key="sub.id" style="margin-bottom: 5px">
-              <div v-if="item.type === '单选题'">
+              <div v-if="item.type === 'Single Choice'">
                 <el-radio :label="sub.content"  v-model="item.answer"></el-radio>
               </div>
             </div>
-            <div v-if="item.type === '填空题'">
+            <div v-if="item.type === 'Blank'">
               <el-input type="textarea" v-model="item.answer"></el-input>
             </div>
           </div>
@@ -32,7 +32,7 @@
       </div>
 
       <div style="text-align: center">
-        <el-button size="medium" type="primary" @click="submitAnswer">提 交</el-button>
+        <el-button size="medium" type="primary" @click="submitAnswer">submit</el-button>
       </div>
     </div>
   </div>
@@ -54,7 +54,7 @@ export default {
     submitAnswer() {
       for (let i = 0; i < this.questionList.length; i++) {
         if (!this.questionList[i].answer) {
-          this.$message.warning('请填写完所有题目再提交')
+          this.$message.warning('Please complete all questions before submitting')
           return
         }
       }
@@ -62,14 +62,14 @@ export default {
       let answerList = []
       this.questionList.forEach(item => {
         let content = item.answer
-        if (item.type === '多选题') {
+        if (item.type === 'Multiple Choice') {
           content = JSON.stringify(content)   // 把数组转换成字符串存到数据库
         }
         answerList.push({questionId: item.id, content: content, pageId: item.pageId, no: no + ''})
       })
       this.$request.post('/answer/addBatch', answerList).then(res => {
         if (res.code === '200') {  // 表示成功保存
-          this.$message.success('提交成功')
+          this.$message.success('success')
           setTimeout(() => {
             location.href = '/thanks'
           }, 500)
@@ -88,7 +88,7 @@ export default {
       }).then(res => {
         this.questionList = res.data || []
         this.questionList.forEach(item => {
-          if (item.type === '多选题') {
+          if (item.type === 'Multiple Choice') {
             this.$set(item, 'answer', [])   // 注意：多选的时候要设置一个空的数组，否则会报错
           } else {
             this.$set(item, 'answer', '')
