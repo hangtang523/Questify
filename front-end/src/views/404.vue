@@ -3,7 +3,6 @@
     <div style="height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center">
       <div style="font-size: 40px">404 NOT FOUND <router-link to="/">Return to Main page</router-link></div>
     </div>
-
   </div>
 </template>
 
