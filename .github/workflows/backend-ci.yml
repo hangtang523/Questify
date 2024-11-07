@@ -82,16 +82,37 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Get current version
+      - name: Get current version from pom.xml
         id: version
-        run: echo "VERSION=$(cat back-end/pom.xml | grep -m1 -oPm1 '(?<=<version>)[^<]+')" >> $GITHUB_ENV
+        run: |
+          # 获取当前版本号
+          CURRENT_VERSION=$(cat back-end/pom.xml | grep -m1 -oPm1 '(?<=<version>)[^<]+')
 
-      - name: Create and push tag
+          # 递增版本号（这里递增 patch，你可以改为 minor 或 major）
+          NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. -v OFS=. '{$3+=1; print}')
+
+          # 更新 pom.xml 中的版本号
+          sed -i "s|<version>$CURRENT_VERSION</version>|<version>$NEW_VERSION</version>|" back-end/pom.xml
+
+          # 将新版本号写入环境变量
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Commit updated version
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add back-end/pom.xml
+          git commit -m "Bump backend version to $NEW_VERSION"
+          git push origin main  # 提交新版本号
+
+      - name: Create and push tag with prefix
         env:
           VERSION: ${{ env.VERSION }}
         run: |
-          git tag "v$VERSION"
-          git push origin "v$VERSION"
+          # 使用前缀创建带版本的标签
+          TAG_NAME="backend-v$VERSION"
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
