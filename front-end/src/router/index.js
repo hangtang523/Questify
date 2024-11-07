@@ -24,6 +24,10 @@ const routes = [
       { path: 'notice', name: 'Notice', meta: { name: 'Announcement Management' }, component: () => import('../views/manager/Notice') },
       { path: 'user', name: 'User', meta: { name: 'User Inforamtion' }, component: () => import('../views/manager/User') },
       { path: 'pages', name: 'Pages', meta: { name: 'Pages Inforamtion' }, component: () => import('../views/manager/Pages') },
+      { path: 'question', name: 'Question', meta: { name: 'Question Inforamtion' }, component: () => import('../views/manager/Question') },
+      { path: 'questionItem', name: 'QuestionItem', meta: { name: 'Question Content' }, component: () => import('../views/manager/QuestionItem') },
+      { path: 'answer', name: 'Answer', meta: { name: '答题信息' }, component: () => import('../views/manager/Answer') },
+
     ]
   },
   {
@@ -33,6 +37,9 @@ const routes = [
     children: [
       { path: 'home', name: 'Home', meta: { name: 'Home' }, component: () => import('../views/front/Home') },
       { path: 'person', name: 'Person', meta: { name: 'Person' }, component: () => import('../views/front/Person') },
+      { path: 'pages', name: 'FPages', meta: { name: '我的问卷' }, component: () => import('../views/front/Pages') },
+      { path: 'preview', name: 'Preview', meta: { name: '预览问卷' }, component: () => import('../views/front/Preview') },
+
     ]
   },
   { path: '/login', name: 'Login', meta: { name: 'Login' }, component: () => import('../views/Login.vue') },
