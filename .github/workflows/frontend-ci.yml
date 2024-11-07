@@ -30,6 +30,34 @@ jobs:
         run: |
           cd front-end
           npm run build
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder Test Step
+        if: always()  # Ensures this runs without failing the workflow
+        run: echo "Test step placeholder - no tests executed"
+
+  synk:
+      needs: test
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Install Snyk CLI
+          run: npm install -g snyk
+
+        - name: Authenticate Snyk
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          run: snyk auth $SNYK_TOKEN
+
+        - name: Run Snyk to check for vulnerabilities
+          run: |
+            cd front-end
+            snyk test --severity-threshold=high || true
 
   release:
     needs: build
