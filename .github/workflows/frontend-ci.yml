@@ -66,6 +66,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git add front-end/package.json
           git commit -m "Bump version to $NEW_VERSION"
+          git pull origin main
           git push origin main  # 提交新版本号
 
       - name: Create and push tag with prefix
@@ -73,7 +74,7 @@ jobs:
           VERSION: ${{ env.VERSION }}
         run: |
           # 使用前缀创建带版本的标签
-          TAG_NAME="frontend-v$VERSION"
+          TAG_NAME="frontend-v${VERSION}"
           git tag "$TAG_NAME"
           git push origin "$TAG_NAME"
 
