@@ -26,6 +26,8 @@ const routes = [
       { path: 'pages', name: 'Pages', meta: { name: 'Pages Inforamtion' }, component: () => import('../views/manager/Pages') },
       { path: 'question', name: 'Question', meta: { name: 'Question Inforamtion' }, component: () => import('../views/manager/Question') },
       { path: 'questionItem', name: 'QuestionItem', meta: { name: 'Question Content' }, component: () => import('../views/manager/QuestionItem') },
+      { path: 'answer', name: 'Answer', meta: { name: '答题信息' }, component: () => import('../views/manager/Answer') },
+
     ]
   },
   {
