@@ -1,31 +1,29 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.Pages;
-import com.example.service.PagesService;
+import com.example.entity.QuestionItem;
+import com.example.service.QuestionItemService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 问卷表前端操作接口
+ * 题目内容表前端操作接口
  **/
 @RestController
-@RequestMapping("/pages")
-public class PagesController {
+@RequestMapping("/questionItem")
+public class QuestionItemController {
 
     @Resource
-    private PagesService pagesService;
-
+    private QuestionItemService questionItemService;
 
     /**
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody Pages pages) {
-        pagesService.add(pages);
+    public Result add(@RequestBody QuestionItem questionItem) {
+        questionItemService.add(questionItem);
         return Result.success();
     }
 
@@ -34,7 +32,7 @@ public class PagesController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        pagesService.deleteById(id);
+        questionItemService.deleteById(id);
         return Result.success();
     }
 
@@ -43,7 +41,7 @@ public class PagesController {
      */
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
-        pagesService.deleteBatch(ids);
+        questionItemService.deleteBatch(ids);
         return Result.success();
     }
 
@@ -51,8 +49,8 @@ public class PagesController {
      * 修改
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody Pages pages) {
-        pagesService.updateById(pages);
+    public Result updateById(@RequestBody QuestionItem questionItem) {
+        questionItemService.updateById(questionItem);
         return Result.success();
     }
 
@@ -61,16 +59,16 @@ public class PagesController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        Pages pages = pagesService.selectById(id);
-        return Result.success(pages);
+        QuestionItem questionItem = questionItemService.selectById(id);
+        return Result.success(questionItem);
     }
 
     /**
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Pages pages) {
-        List<Pages> list = pagesService.selectAll(pages);
+    public Result selectAll(QuestionItem questionItem) {
+        List<QuestionItem> list = questionItemService.selectAll(questionItem);
         return Result.success(list);
     }
 
@@ -78,19 +76,11 @@ public class PagesController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(Pages pages,
+    public Result selectPage(QuestionItem questionItem,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<Pages> page = pagesService.selectPage(pages, pageNum, pageSize);
+        PageInfo<QuestionItem> page = questionItemService.selectPage(questionItem, pageNum, pageSize);
         return Result.success(page);
-    }
-    /**
-     * 复制
-     */
-    @PostMapping("/copy")
-    public Result copy(@RequestParam Integer pageId) {
-        pagesService.copy(pageId);
-        return Result.success();
     }
 
 }

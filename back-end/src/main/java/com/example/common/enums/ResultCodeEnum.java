@@ -16,6 +16,10 @@ public enum ResultCodeEnum {
     PARAM_PASSWORD_ERROR("5005", "原密码输入错误"),
     ;
 
+    public String getCode() {
+        return code;
+    }
+
     public String code;
     public String msg;
 
