@@ -27,6 +27,12 @@
         from question_item
         where id = #{id}
     </select>
+    <select id="selectByQuestionId" resultType="com.example.entity.QuestionItem">
+        select
+        <include refid="Base_Column_List" />
+        from question_item
+        where question_id = #{questionId}
+    </select>
 
     <delete id="deleteById">
         delete from question_item
