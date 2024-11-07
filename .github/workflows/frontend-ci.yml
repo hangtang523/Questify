@@ -32,7 +32,7 @@ jobs:
           npm run build
 
   release:
-    needs: deploy
+    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  # Only runs on the main branch
 
