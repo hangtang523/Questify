@@ -45,16 +45,38 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Get current version
+      - name: Get and increment current version
         id: version
-        run: echo "VERSION=$(cat front-end/package.json | jq -r .version)" >> $GITHUB_ENV
+        run: |
+          # 获取当前版本号
+          CURRENT_VERSION=$(jq -r .version < front-end/package.json)
 
-      - name: Create and push tag
+          # 递增版本号（这里递增 patch，你可以改为 minor 或 major）
+          NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. -v OFS=. '{$3+=1; print}')
+
+          # 更新 package.json
+          jq ".version = \"$NEW_VERSION\"" front-end/package.json > tmp.json && mv tmp.json front-end/package.json
+
+          # 将新版本号写入环境变量
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Commit updated version
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add front-end/package.json
+          git commit -m "Bump version to $NEW_VERSION"
+          git pull origin main
+          git push origin main  # 提交新版本号
+
+      - name: Create and push tag with prefix
         env:
           VERSION: ${{ env.VERSION }}
         run: |
-          git tag "v$VERSION"
-          git push origin "v$VERSION"
+          # 使用前缀创建带版本的标签
+          TAG_NAME="frontend-v${VERSION}"
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
