@@ -59,7 +59,7 @@
         </el-form-item>
         <el-form-item label="img" prop="img">
           <el-upload
-              :action="$baseUrl + '/files/upload'"
+              :action="baseUrl + '/files/upload'"
               :headers="{ token: user.token }"
               list-type="picture"
               :on-success="handleImgSuccess"
@@ -152,7 +152,8 @@ export default {
       pageCount: {},
       pageCountVisible: false,
       shareVisible: false,
-      link: ''
+      link: '',
+      baseUrl: process.env.VUE_APP_BASE_API
     }
   },
   created() {
