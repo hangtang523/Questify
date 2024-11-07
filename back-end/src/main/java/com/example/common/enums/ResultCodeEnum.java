@@ -19,16 +19,12 @@ public enum ResultCodeEnum {
     public String code;
     public String msg;
 
-    ResultCodeEnum(String code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
     public String getCode() {
         return code;
     }
 
-    public String getMsg() {
-        return msg;
+    ResultCodeEnum(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 }

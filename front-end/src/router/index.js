@@ -37,6 +37,8 @@ const routes = [
     children: [
       { path: 'home', name: 'Home', meta: { name: 'Home' }, component: () => import('../views/front/Home') },
       { path: 'person', name: 'Person', meta: { name: 'Person' }, component: () => import('../views/front/Person') },
+      { path: 'pages', name: 'FPages', meta: { name: '我的问卷' }, component: () => import('../views/front/Pages') },
+
     ]
   },
   { path: '/login', name: 'Login', meta: { name: 'Login' }, component: () => import('../views/Login.vue') },
