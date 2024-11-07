@@ -60,7 +60,7 @@ jobs:
             snyk test --severity-threshold=high || true
 
   release:
-    needs: build
+    needs: synk
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  # Only runs on the main branch
 
