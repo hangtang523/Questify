@@ -17,6 +17,8 @@
         <where>
             <if test="name != null"> and pages.name like concat('%', #{name}, '%')</if>
             <if test="userName != null"> and user.name like concat('%', #{userName}, '%')</if>
+            <if test="userId != null"> and pages.user_id = #{userId}</if>
+            <if test="open != null"> and pages.open = #{open}</if>
         </where>
         order by id desc
     </select>

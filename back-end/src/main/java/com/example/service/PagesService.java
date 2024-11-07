@@ -87,6 +87,10 @@ public class PagesService {
      * 分页查询
      */
     public PageInfo<Pages> selectPage(Pages pages, Integer pageNum, Integer pageSize) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        if (RoleEnum.USER.name().equals(currentUser.getRole())) {  // 如果是用户的话 需要筛选出当前用户自己的问卷信息
+            pages.setUserId(currentUser.getId());
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<Pages> list = pagesMapper.selectAll(pages);
         return PageInfo.of(list);

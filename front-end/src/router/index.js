@@ -39,6 +39,7 @@ const routes = [
       { path: 'person', name: 'Person', meta: { name: 'Person' }, component: () => import('../views/front/Person') },
       { path: 'pages', name: 'FPages', meta: { name: '我的问卷' }, component: () => import('../views/front/Pages') },
       { path: 'preview', name: 'Preview', meta: { name: '预览问卷' }, component: () => import('../views/front/Preview') },
+      { path: 'design', name: 'Design', meta: { name: 'Design' }, component: () => import('../views/front/Design') },
 
     ]
   },
