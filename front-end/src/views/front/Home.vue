@@ -15,7 +15,7 @@
 
           <div>
             <el-button icon="el-icon-video-play" type="success" size="mini" style="background-color: rgb(130, 130, 255); border-color: rgb(130, 130, 255)" @click="preview(item.id)">预览</el-button>
-            <el-button type="primary" size="mini" style="background-color: rgb(91, 165, 133); border-color: rgb(91, 165, 133)">使用该模板</el-button>
+            <el-button type="primary" size="mini" style="background-color: rgb(91, 165, 133); border-color: rgb(91, 165, 133)" @click="copy(item.id)">使用该模板</el-button>
           </div>
         </div>
       </el-col>
@@ -38,6 +38,15 @@ export default {
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
+    copy(pageId) {
+      this.$request.post('/pages/copy?pageId=' + pageId).then(res => {
+        if (res.code === '200') {
+          this.$message.success("复制成功！")
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
     preview(pageId) {
       console.log(pageId);
       console.log("Button clicked!", pageId);
