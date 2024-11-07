@@ -4,6 +4,8 @@ import cn.hutool.core.date.DateUtil;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.entity.Pages;
+import com.example.entity.Question;
+import com.example.entity.QuestionItem;
 import com.example.mapper.PagesMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
@@ -22,7 +24,10 @@ public class PagesService {
 
     @Resource
     private PagesMapper pagesMapper;
-
+    @Resource
+    private QuestionService questionService;
+    @Resource
+    private QuestionItemService questionItemService;
 
     /**
      * 新增
@@ -45,7 +50,9 @@ public class PagesService {
      */
     @Transactional
     public void deleteById(Integer id) {
+
         pagesMapper.deleteById(id);
+        questionService.deleteByPageId(id);
     }
 
     /**
@@ -82,9 +89,43 @@ public class PagesService {
      * 分页查询
      */
     public PageInfo<Pages> selectPage(Pages pages, Integer pageNum, Integer pageSize) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        if (RoleEnum.USER.name().equals(currentUser.getRole())) {  // 如果是用户的话 需要筛选出当前用户自己的问卷信息
+            pages.setUserId(currentUser.getId());
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<Pages> list = pagesMapper.selectAll(pages);
         return PageInfo.of(list);
     }
 
+    @Transactional
+    public void copy(Integer pageId) {
+        Pages pages = this.selectById(pageId);  // 拿到当前的被拷贝的问卷的内容
+        pages.setCount(pages.getCount() + 1);
+        this.updateById(pages);  // 更新使用次数
+
+        Pages newPage = new Pages();
+        newPage.setName(pages.getName() + "-拷贝");
+        newPage.setDescr(pages.getDescr());
+        newPage.setImg(pages.getImg());
+//        Account currentUser = TokenUtils.getCurrentUser();
+//        newPage.setUserId(currentUser.getId());  // 注意这个地方！复制之后的问卷应该使用新的用户ID
+        this.add(newPage);
+
+        List<Question> questionList = questionService.selectByPageId(pageId);  // 拿到当前问卷关联的所有题目信息
+        for (Question question : questionList) {
+            question.setId(null);  // 清除原先的主键，因为要插入新的数据
+            question.setPageId(newPage.getId());  // 设置题目的问卷ID
+            questionService.add(question);  // 插入数据到数据库
+
+            List<QuestionItem> questionItemList = question.getQuestionItemList();
+            for (QuestionItem questionItem : questionItemList) {
+                questionItem.setId(null);
+                questionItem.setQuestionId(question.getId());
+                questionItemService.add(questionItem);
+            }
+        }
+
+/*        LogsService.recordLog("复制新的问卷【" + newPage.getName() + "】", LogsTypeEnum.COPY.getValue(), TokenUtils.getCurrentUser().getUsername());*/
+    }
 }
