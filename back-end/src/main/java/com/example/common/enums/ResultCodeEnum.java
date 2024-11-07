@@ -16,17 +16,25 @@ public enum ResultCodeEnum {
     PARAM_PASSWORD_ERROR("5005", "Original password is incorrect");
 
 
+
+
     public String code;
     public String msg;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     ResultCodeEnum(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public String getCode() {
-        return code;
-    }
+
 
     public String getMsg() {
         return msg;
