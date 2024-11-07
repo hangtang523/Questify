@@ -24,6 +24,7 @@ public class AdminController {
     /**
      * 新增
      */
+
     @PostMapping("/add")
     @ApiOperation("Create Admin")
     public Result add(@RequestBody Admin admin) {

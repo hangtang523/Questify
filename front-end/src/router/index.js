@@ -22,8 +22,12 @@ const routes = [
       { path: 'adminPerson', name: 'AdminPerson', meta: { name: 'Profile' }, component: () => import('../views/manager/AdminPerson') },
       { path: 'password', name: 'Password', meta: { name: 'Reset Password' }, component: () => import('../views/manager/Password') },
       { path: 'notice', name: 'Notice', meta: { name: 'Announcement Management' }, component: () => import('../views/manager/Notice') },
-      { path: 'user', name: 'User', meta: { name: 'User Inforamtion' }, component: () => import('../views/manager/User') },
-      { path: 'pages', name: 'Pages', meta: { name: 'Pages Inforamtion' }, component: () => import('../views/manager/Pages') },
+      { path: 'user', name: 'User', meta: { name: 'User Information' }, component: () => import('../views/manager/User') },
+      { path: 'pages', name: 'Pages', meta: { name: 'Pages Information' }, component: () => import('../views/manager/Pages') },
+      { path: 'question', name: 'Question', meta: { name: 'Question Information' }, component: () => import('../views/manager/Question') },
+      { path: 'questionItem', name: 'QuestionItem', meta: { name: 'Question Content' }, component: () => import('../views/manager/QuestionItem') },
+      { path: 'answer', name: 'Answer', meta: { name: 'Answers Information' }, component: () => import('../views/manager/Answer') },
+
     ]
   },
   {
@@ -33,8 +37,15 @@ const routes = [
     children: [
       { path: 'home', name: 'Home', meta: { name: 'Home' }, component: () => import('../views/front/Home') },
       { path: 'person', name: 'Person', meta: { name: 'Person' }, component: () => import('../views/front/Person') },
+      { path: 'pages', name: 'FPages', meta: { name: 'My questionnaire' }, component: () => import('../views/front/Pages') },
+      { path: 'preview', name: 'Preview', meta: { name: 'preview questionnaire' }, component: () => import('../views/front/Preview') },
+      { path: 'design', name: 'Design', meta: { name: 'Design' }, component: () => import('../views/front/Design') },
+
+
     ]
   },
+  { path: '/realPage', name: 'RealPage', meta: { name: 'Do Page' }, component: () => import('../views/front/RealPage') },
+  { path: '/thanks', name: 'RealPage', meta: { name: 'Thanks' }, component: () => import('../views/front/Thanks') },
   { path: '/login', name: 'Login', meta: { name: 'Login' }, component: () => import('../views/Login.vue') },
   { path: '/register', name: 'Register', meta: { name: 'Register' }, component: () => import('../views/Register.vue') },
   { path: '*', name: 'NotFound', meta: { name: 'NotFound' }, component: () => import('../views/404.vue') },
