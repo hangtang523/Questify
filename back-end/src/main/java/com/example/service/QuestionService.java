@@ -20,6 +20,8 @@ public class QuestionService {
 
     @Resource
     private QuestionMapper questionMapper;
+    @Resource
+    QuestionItemService questionItemService;
 
     /**
      * 新增
@@ -81,4 +83,12 @@ public class QuestionService {
         return PageInfo.of(list);
     }
 
+    public List<Question> selectByPageId(Integer pageId) {
+        List<Question> questionList = questionMapper.selectByPageId(pageId);
+        for(Question question : questionList){
+            question.setQuestionItemList(questionItemService.selectByQuestionId(question.getId()));
+        }
+
+        return questionList;
+    }
 }

@@ -82,5 +82,12 @@ public class QuestionController {
         PageInfo<Question> page = questionService.selectPage(question, pageNum, pageSize);
         return Result.success(page);
     }
+    /*根据pageid查询*/
+    @GetMapping("/selectByPageId/{pageId}")
+    public Result selectByPageId(@PathVariable Integer pageId) {
+        List<Question> list = questionService.selectByPageId(pageId);
+        return Result.success(list);
+    }
+
 
 }

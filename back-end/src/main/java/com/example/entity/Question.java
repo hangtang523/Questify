@@ -23,6 +23,16 @@ public class Question implements Serializable {
     private String pageName;
     private String userName;
 
+    private List<QuestionItem> QuestionItemList;
+
+    public List<QuestionItem> getQuestionItemList() {
+        return QuestionItemList;
+    }
+
+    public void setQuestionItemList(List<QuestionItem> questionItemList) {
+        QuestionItemList = questionItemList;
+    }
+
     public String getPageName() {
         return pageName;
     }

@@ -71,4 +71,7 @@ public class QuestionItemService {
         return PageInfo.of(list);
     }
 
+    public List<QuestionItem> selectByQuestionId(Integer questionId) {
+        return questionItemMapper.selectByQuestionId(questionId);
+    }
 }

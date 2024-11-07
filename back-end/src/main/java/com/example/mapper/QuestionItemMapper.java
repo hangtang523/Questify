@@ -33,4 +33,5 @@ public interface QuestionItemMapper {
      */
     List<QuestionItem> selectAll(QuestionItem questionItem);
 
+    List<QuestionItem> selectByQuestionId(Integer questionId);
 }

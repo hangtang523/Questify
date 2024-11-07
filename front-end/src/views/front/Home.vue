@@ -14,7 +14,7 @@
           </div>
 
           <div>
-            <el-button icon="el-icon-video-play" type="success" size="mini" style="background-color: rgb(130, 130, 255); border-color: rgb(130, 130, 255)">预览</el-button>
+            <el-button icon="el-icon-video-play" type="success" size="mini" style="background-color: rgb(130, 130, 255); border-color: rgb(130, 130, 255)" @click="preview(item.id)">预览</el-button>
             <el-button type="primary" size="mini" style="background-color: rgb(91, 165, 133); border-color: rgb(91, 165, 133)">使用该模板</el-button>
           </div>
         </div>
@@ -34,9 +34,15 @@ export default {
   },
   mounted() {
     this.load()
+    console.log("Front Home Page Loaded!");
   },
   // methods：本页面所有的点击事件或者其他函数定义区
   methods: {
+    preview(pageId) {
+      console.log(pageId);
+      console.log("Button clicked!", pageId);
+      window.open('/front/preview?pageId=' + pageId)
+    },
     load() {
       this.$request.get('/pages/selectAll', {
         params: {open: 'Yes'}
