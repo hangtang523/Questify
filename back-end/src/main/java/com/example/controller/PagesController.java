@@ -84,5 +84,13 @@ public class PagesController {
         PageInfo<Pages> page = pagesService.selectPage(pages, pageNum, pageSize);
         return Result.success(page);
     }
+    /**
+     * 复制
+     */
+    @PostMapping("/copy")
+    public Result copy(@RequestParam Integer pageId) {
+        pagesService.copy(pageId);
+        return Result.success();
+    }
 
 }
