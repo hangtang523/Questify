@@ -1,4 +1,4 @@
-package serviceTest.QuestionService;// QuestionServiceTest.java
+package com.example.serviceTest.QuestionService;// QuestionServiceTest.java
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

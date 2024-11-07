@@ -1,4 +1,4 @@
-package serviceTest.UserService;// UserServiceTest.java
+package com.example.serviceTest.UserService;// UserServiceTest.java
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

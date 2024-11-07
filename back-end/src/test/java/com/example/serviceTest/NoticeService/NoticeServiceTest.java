@@ -1,4 +1,4 @@
-package serviceTest.NoticeService;
+package com.example.serviceTest.NoticeService;
 
 import com.example.entity.Notice;
 import com.example.mapper.NoticeMapper;

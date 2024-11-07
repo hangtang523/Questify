@@ -1,4 +1,4 @@
-package serviceTest.PagesService;// PagesServiceTest.java
+package com.example.serviceTest.PagesService;// PagesServiceTest.java
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

@@ -1,4 +1,4 @@
-package serviceTest.AdminService;
+package com.example.serviceTest.AdminService;
 
 import com.example.common.Constants;
 import com.example.common.enums.ResultCodeEnum;
