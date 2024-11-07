@@ -103,7 +103,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git add back-end/pom.xml
           git commit -m "Bump backend version to $NEW_VERSION"
-          git pull origin main
+          git pull --rebase origin main
           git push origin main  # 提交新版本号
 
       - name: Create and push tag with prefix
@@ -121,7 +121,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: "v${{ env.VERSION }}"
-          release_name: "Release v${{ env.VERSION }}"
+          release_name: "Release Backend-v${{ env.VERSION }}"
           body: |
             Automated release for version v${{ env.VERSION }}
           draft: false
