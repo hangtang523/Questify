@@ -8,7 +8,7 @@
         <div style="margin: 15px; text-align: center">
           <el-upload
               class="avatar-uploader"
-              :action="$baseUrl + '/files/upload'"
+              :action="BaseAPI + '/files/upload'"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
           >
@@ -68,6 +68,7 @@ export default {
 
     return {
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
+      BaseAPI: process.env.VUE_APP_BASE_API,
       dialogVisible: false,
       rules: {
         password: [
