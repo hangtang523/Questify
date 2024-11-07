@@ -1,31 +1,29 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.Pages;
-import com.example.service.PagesService;
+import com.example.entity.Answer;
+import com.example.service.AnswerService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 问卷表前端操作接口
+ * 前端操作接口
  **/
 @RestController
-@RequestMapping("/pages")
-public class PagesController {
+@RequestMapping("/answer")
+public class AnswerController {
 
     @Resource
-    private PagesService pagesService;
-
+    private AnswerService answerService;
 
     /**
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody Pages pages) {
-        pagesService.add(pages);
+    public Result add(@RequestBody Answer answer) {
+        answerService.add(answer);
         return Result.success();
     }
 
@@ -34,7 +32,7 @@ public class PagesController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        pagesService.deleteById(id);
+        answerService.deleteById(id);
         return Result.success();
     }
 
@@ -43,7 +41,7 @@ public class PagesController {
      */
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
-        pagesService.deleteBatch(ids);
+        answerService.deleteBatch(ids);
         return Result.success();
     }
 
@@ -51,8 +49,8 @@ public class PagesController {
      * 修改
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody Pages pages) {
-        pagesService.updateById(pages);
+    public Result updateById(@RequestBody Answer answer) {
+        answerService.updateById(answer);
         return Result.success();
     }
 
@@ -61,16 +59,16 @@ public class PagesController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        Pages pages = pagesService.selectById(id);
-        return Result.success(pages);
+        Answer answer = answerService.selectById(id);
+        return Result.success(answer);
     }
 
     /**
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Pages pages) {
-        List<Pages> list = pagesService.selectAll(pages);
+    public Result selectAll(Answer answer) {
+        List<Answer> list = answerService.selectAll(answer);
         return Result.success(list);
     }
 
@@ -78,19 +76,11 @@ public class PagesController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(Pages pages,
+    public Result selectPage(Answer answer,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<Pages> page = pagesService.selectPage(pages, pageNum, pageSize);
+        PageInfo<Answer> page = answerService.selectPage(answer, pageNum, pageSize);
         return Result.success(page);
-    }
-    /**
-     * 复制
-     */
-    @PostMapping("/copy")
-    public Result copy(@RequestParam Integer pageId) {
-        pagesService.copy(pageId);
-        return Result.success();
     }
 
 }
