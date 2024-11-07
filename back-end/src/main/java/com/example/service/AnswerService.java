@@ -70,4 +70,9 @@ public class AnswerService {
         return PageInfo.of(list);
     }
 
+    public void addBatch(List<Answer> answerList) {
+        for(Answer answer : answerList) {
+            this.add(answer);
+        }
+    }
 }

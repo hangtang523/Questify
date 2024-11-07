@@ -41,8 +41,11 @@ const routes = [
       { path: 'preview', name: 'Preview', meta: { name: '预览问卷' }, component: () => import('../views/front/Preview') },
       { path: 'design', name: 'Design', meta: { name: 'Design' }, component: () => import('../views/front/Design') },
 
+
     ]
   },
+  { path: '/realPage', name: 'RealPage', meta: { name: 'Do Page' }, component: () => import('../views/front/RealPage') },
+  { path: '/thanks', name: 'RealPage', meta: { name: 'Thanks' }, component: () => import('../views/front/Thanks') },
   { path: '/login', name: 'Login', meta: { name: 'Login' }, component: () => import('../views/Login.vue') },
   { path: '/register', name: 'Register', meta: { name: 'Register' }, component: () => import('../views/Register.vue') },
   { path: '*', name: 'NotFound', meta: { name: 'NotFound' }, component: () => import('../views/404.vue') },

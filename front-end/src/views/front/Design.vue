@@ -10,7 +10,7 @@
           </div>
         </div>
         <div>
-          <el-button type="primary"><i class="el-icon-share"></i> 分享</el-button>
+          <el-button type="primary" @click="share()"><i class="el-icon-share"></i> 分享</el-button>
           <el-button type="info" @click="preview(pages.id)"><i class="el-icon-video-play"></i> 预览</el-button>
           <el-button type="success" :disabled="pages.saved === '是'" @click="handleSaved"><i
               class="el-icon-s-promotion"></i> 发布
@@ -19,7 +19,7 @@
       </div>
 
       <div style="margin-bottom: 20px">
-        <el-button type="primary" @click="addQuestion('单选题')">新建单选题</el-button>
+        <el-button type="primary" @click="addQuestion('Single Choice')">新建单选题</el-button>
         <el-button type="info" @click="addQuestion('多选题')">新建多选题</el-button>
         <el-button type="success" @click="addQuestion('填空题')">新建填空题</el-button>
       </div>
@@ -30,7 +30,7 @@
             <span style="font-weight: bold; margin-right: 5px">题目{{ index + 1 }}</span>
             <el-input v-model="item.name" style="width: 70%; margin-right: 5px"
                       @change="changeQuestionName(item)"></el-input>
-            <el-tag style="margin-right: 5px; color: #2a60c9" v-if="item.type === '单选题'">{{ item.type }}</el-tag>
+            <el-tag style="margin-right: 5px; color: #2a60c9" v-if="item.type === 'Single Choice'">{{ item.type }}</el-tag>
             <el-tag style="margin-right: 5px; color: orange" v-if="item.type === '多选题'">{{ item.type }}</el-tag>
             <el-tag style="margin-right: 5px; color: seagreen" v-if="item.type === '填空题'">{{ item.type }}</el-tag>
             <span style="color: red; cursor: pointer; font-size: 12px" @click="delQuestion(item.id)"><i
@@ -56,6 +56,17 @@
         </div>
       </div>
     </div>
+
+
+    <el-dialog title="分享" :visible.sync="shareVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+      <div style="display: flex; align-items: center">
+        <span style="margin-right: 5px">链接</span> <el-input v-model="link" style="flex: 1; margin-right: 5px" />
+        <el-button type="primary" @click="copyLink">复制</el-button>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="shareVisible = false">关 闭</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -67,13 +78,34 @@ export default {
   data() {
     return {
       pages: {},
-      questionList: []
+      questionList: [],
+      shareVisible: false,
+      link: ''
     }
   },
   created() {
     this.load()
   },
   methods: {
+    copyLink() {
+      let _input = document.createElement("input");   // 直接构建input
+
+      _input.value = this.link;  // 设置内容
+      document.body.appendChild(_input);    // 添加临时实例
+      _input.select();   // 选择实例内容
+      document.execCommand("Copy");   // 执行复制
+      document.body.removeChild(_input)
+      this.$message.success("复制成功")
+    },
+    share() {
+      if (this.pages.saved !==  '是') {
+        this.$message.warning('未公开的问卷不允许分享')
+        return
+      }
+
+      this.link = location.href.substring(0, location.href.indexOf('/front')) + '/realPage?pageId=' + this.pages.id
+      this.shareVisible = true
+    },
     handleSaved() {
       if (!this.validate()) { // 校验没通过  不能发布
         return
@@ -198,6 +230,7 @@ export default {
       this.$request.get(`/question/selectByPageId/${pageId}`, {}).then(res => {
         this.questionList = res.data || []
       })
+
     }
   }
 }

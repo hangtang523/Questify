@@ -26,6 +26,11 @@ public class AnswerController {
         answerService.add(answer);
         return Result.success();
     }
+    @PostMapping("/addBatch")
+    public Result addBatch(@RequestBody List<Answer> answerList) {
+        answerService.addBatch(answerList);
+        return Result.success();
+    }
 
     /**
      * 删除
