@@ -74,4 +74,8 @@ public class QuestionItemService {
     public List<QuestionItem> selectByQuestionId(Integer questionId) {
         return questionItemMapper.selectByQuestionId(questionId);
     }
+
+    public void deleteByQuestionId(Integer questionId) {
+        questionItemMapper.deleteByQuestionId(questionId);
+    }
 }

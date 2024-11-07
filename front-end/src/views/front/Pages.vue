@@ -26,7 +26,7 @@
               <el-button type="text" style="color: #2a60c9; font-size: 16px" @click="design(item.id)"><i class="el-icon-setting" ></i> 设计</el-button>
               <el-button type="text" style="color: #2a60c9; font-size: 16px"><i class="el-icon-document-copy"></i> 复制</el-button>
               <el-button type="text" style="color: #2a60c9; font-size: 16px"><i class="el-icon-share"></i> 分享</el-button>
-              <el-button type="text" style="color: #fc4b4b; font-size: 16px"><i class="el-icon-delete"></i> 删除</el-button>
+              <el-button type="text" style="color: #fc4b4b; font-size: 16px" @click="del(item.id)"><i class="el-icon-delete"></i> 删除</el-button>
               <el-button type="text" style="color: orange; font-size: 16px"><i class="el-icon-s-marketing"></i> 数据统计</el-button>
             </div>
           </div>
@@ -115,6 +115,19 @@ export default {
     this.load(1)
   },
   methods: {
+    del(pageId) {   // 单个删除
+      this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
+        this.$request.delete('/pages/delete/' + pageId).then(res => {
+          if (res.code === '200') {   // 表示操作成功
+            this.$message.success('操作成功')
+            this.load(1)
+          } else {
+            this.$message.error(res.msg)  // 弹出错误的信息
+          }
+        })
+      }).catch(() => {
+      })
+    },
     design(pageId){
       window.open('/front/design?pageId=' + pageId)
     },

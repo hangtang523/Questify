@@ -50,7 +50,9 @@ public class PagesService {
      */
     @Transactional
     public void deleteById(Integer id) {
+
         pagesMapper.deleteById(id);
+        questionService.deleteByPageId(id);
     }
 
     /**

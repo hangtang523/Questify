@@ -89,5 +89,14 @@ public class QuestionController {
         return Result.success(list);
     }
 
+    /**
+     * 新增单选题目或多谢题目并默认一个选项
+     */
+    @PostMapping("/addForUser")
+    public Result addForUser(@RequestBody Question question) {
+        questionService.addForUser(question);
+        return Result.success();
+    }
+
 
 }

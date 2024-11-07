@@ -1,13 +1,16 @@
 package com.example.service;
 
+import com.example.common.enums.QuestionTypeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.entity.Question;
+import com.example.entity.QuestionItem;
 import com.example.mapper.QuestionMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -42,7 +45,11 @@ public class QuestionService {
      */
     public void deleteById(Integer id) {
         questionMapper.deleteById(id);
+        //删除题目选项
+        questionItemService.deleteByQuestionId(id);
     }
+
+
 
     /**
      * 批量删除
@@ -90,5 +97,34 @@ public class QuestionService {
         }
 
         return questionList;
+    }
+
+    //  用户新建题目
+    @Transactional
+    public void addForUser(Question question) {
+        this.add(question);
+
+        Integer questionId = question.getId();
+        // 单选和多选需要默认2个选项
+        if (QuestionTypeEnum.SINGLE.getValue().equals(question.getType()) || com.example.common.enums.QuestionTypeEnum.MULTIPLE.getValue().equals(question.getType())) {
+            QuestionItem questionItem1 = new QuestionItem();
+            questionItem1.setQuestionId(questionId);
+            questionItemService.add(questionItem1);
+
+            QuestionItem questionItem2 = new QuestionItem();
+            questionItem2.setQuestionId(questionId);
+            questionItemService.add(questionItem2);
+        }
+    }
+
+    public void deleteByPageId(Integer pageId) {
+        List<Question> questionList = this.selectByPageId(pageId);
+        // 根据问卷ID删除题目
+        questionMapper.deleteByPageId(pageId);
+        // 删除题目选项
+        for (Question question : questionList) {
+            questionItemService.deleteByQuestionId(question.getId());
+        }
+
     }
 }

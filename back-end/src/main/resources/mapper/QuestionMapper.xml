@@ -40,6 +40,10 @@
         delete from question
         where  id = #{id}
     </delete>
+    <delete id="deleteByPageId">
+        delete from question
+        where  page_id = #{pageId}
+    </delete>
 
     <insert id="insert" parameterType="com.example.entity.Question" useGeneratedKeys="true" keyProperty="id">
         insert into question

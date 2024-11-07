@@ -38,6 +38,10 @@
         delete from question_item
         where  id = #{id}
     </delete>
+    <delete id="deleteByQuestionId">
+        delete from question_item
+        where  question_id = #{questionId}
+    </delete>
 
     <insert id="insert" parameterType="com.example.entity.QuestionItem" useGeneratedKeys="true" keyProperty="id">
         insert into question_item
