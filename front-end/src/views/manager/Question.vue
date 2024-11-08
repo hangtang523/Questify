@@ -20,10 +20,10 @@
         <el-table-column prop="pageId" label="Page ID"></el-table-column>
         <el-table-column prop="pageName" label="Page Name"></el-table-column>
         <el-table-column prop="userId" label="creatorID"></el-table-column>
-        <el-table-column prop="userName" label="creator"></el-table-column>
+
         <el-table-column label="Actions" align="center" width="180">
           <template v-slot="scope">
-            <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Editor</el-button>
+            <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Edit</el-button>
             <el-button size="mini" type="danger" plain @click="del(scope.row.id)">Delete</el-button>
           </template>
         </el-table-column>
