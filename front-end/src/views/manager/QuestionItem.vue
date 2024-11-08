@@ -8,6 +8,7 @@
 
     <div class="operation">
       <el-button type="primary" plain @click="handleAdd">Add</el-button>
+
       <el-button type="danger" plain @click="delBatch">Batch delete</el-button>
     </div>
 
@@ -20,7 +21,7 @@
         <el-table-column prop="questionName" label="questionName"></el-table-column>
         <el-table-column label="Action" align="center" width="180">
           <template v-slot="scope">
-            <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Editor</el-button>
+            <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Edit</el-button>
             <el-button size="mini" type="danger" plain @click="del(scope.row.id)">Delete</el-button>
           </template>
         </el-table-column>
