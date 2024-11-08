@@ -64,7 +64,7 @@
         </el-form-item>
         <el-form-item label="Cover" prop="img">
           <el-upload
-              :action="$baseUrl + '/files/upload'"
+              :action="BaseAPI + '/files/upload'"
               :headers="{ token: user.token }"
               list-type="picture"
               :on-success="handleImgSuccess"
@@ -111,7 +111,8 @@ export default {
           {required: true, message: 'please enter description', trigger: 'blur'},
         ]
       },
-      ids: []
+      ids: [],
+      BaseAPI: process.env.VUE_APP_BASE_API
     }
   },
   created() {

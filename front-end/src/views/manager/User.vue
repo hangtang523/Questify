@@ -67,7 +67,7 @@
         <el-form-item label="Avater">
           <el-upload
               class="avatar-uploader"
-              :action="$baseUrl + '/files/upload'"
+              :action="baseApi + '/files/upload'"
               :headers="{ token: user.token }"
               list-type="picture"
               :on-success="handleAvatarSuccess"
@@ -105,7 +105,8 @@ export default {
           {required: true, message: 'Please enter the account', trigger: 'blur'},
         ]
       },
-      ids: []
+      ids: [],
+      baseApi: process.env.VUE_APP_BASE_API
     }
   },
   created() {

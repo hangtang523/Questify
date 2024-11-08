@@ -2,14 +2,14 @@
   <div>
     <div class="search">
       <el-input placeholder="Please enter the name to search" style="width: 200px; margin-right: 10px" v-model="pageName"></el-input>
-      <el-input placeholder="Please enter the questionName to search" style="width: 200px; margin-right: 10px" v-model="questionName"></el-input>
-      <el-input placeholder="Please enter the content to search" style="width: 200px" v-model="content"></el-input>
+<!--      <el-input placeholder="Please enter the questionName to search" style="width: 200px; margin-right: 10px" v-model="questionName"></el-input>
+      <el-input placeholder="Please enter the content to search" style="width: 200px" v-model="content"></el-input>-->
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">Search</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">Reset</el-button>
     </div>
 
     <div class="operation">
-      <el-button type="danger" plain @click="delBatch">Batch Delete</el-button>
+<!--      <el-button type="danger" plain @click="delBatch">Batch Delete</el-button>-->
     </div>
 
     <div class="table">
@@ -21,12 +21,12 @@
         <el-table-column prop="questionName" label="questionName"></el-table-column>
         <el-table-column prop="questionId" label="questionId"></el-table-column>
         <el-table-column prop="content" label="content"></el-table-column>
-        <el-table-column label="Action" align="center" width="180">
+<!--        <el-table-column label="Action" align="center" width="180">
           <template v-slot="scope">
             <el-button type="primary" plain @click="handleEdit(scope.row)">Edit</el-button>
             <el-button size="mini" type="danger" plain @click="del(scope.row.id)">Delete</el-button>
           </template>
-        </el-table-column>
+        </el-table-column>-->
       </el-table>
 
       <div class="pagination">
@@ -51,7 +51,7 @@
         <el-form-item label="questionId" prop="questionId">
           <el-input v-model="form.questionId" placeholder="questionId"></el-input>
         </el-form-item>
-        <el-form-item label="内容" prop="content">
+        <el-form-item label="content" prop="content">
           <el-input v-model="form.content" placeholder="content"></el-input>
         </el-form-item>
         <el-form-item label="no" prop="no">
