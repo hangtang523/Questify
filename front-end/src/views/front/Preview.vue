@@ -9,21 +9,21 @@
           <div style="margin-bottom: 10px; font-size: 18px">
             <span>{{ index+1 }}.</span>
             <span style="margin-right: 10px">{{ item.name }}</span>
-            <el-tag v-if="item.type === 'Single Choice'" type="primary">单选题</el-tag>
-            <el-tag v-if="item.type === '多选题'" type="success">多选题</el-tag>
-            <el-tag v-if="item.type === '填空题'" type="warning">填空题</el-tag>
+            <el-tag v-if="item.type === 'Single Choice'" type="primary">Single Choice</el-tag>
+            <el-tag v-if="item.type === 'Multiple Choice'" type="success">Multiple Choice</el-tag>
+            <el-tag v-if="item.type === 'Blank'" type="warning">Blank</el-tag>
           </div>
           <div style="padding-left: 20px"> <!--  遍历内容 -->
             <div v-for="sub in item.questionItemList" :key="sub.id" style="margin-bottom: 5px">
-              <div v-if="item.type === '单选题'">
+              <div v-if="item.type === 'Single Choice'">
                 <el-radio :label="sub.content"></el-radio>
               </div>
-              <div v-if="item.type === '多选题'">
+              <div v-if="item.type === 'Multiple Choice'">
                 <el-checkbox :label="sub.content"></el-checkbox>
               </div>
             </div>
 
-            <div v-if="item.type === '填空题'">
+            <div v-if="item.type === 'Blank'">
               <el-input type="textarea"></el-input>
             </div>
           </div>
@@ -31,7 +31,7 @@
       </div>
 
       <div style="text-align: center">
-        <el-button size="medium" type="primary" @click="closeWin">关 闭</el-button>
+        <el-button size="medium" type="primary" @click="closeWin">Close</el-button>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@
     <div class="front-header">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.png" alt="">
-        <div class="title">Frontend</div>
+        <div class="title">Questify</div>
       </div>
       <div class="front-header-center">
         <div class="front-header-nav">

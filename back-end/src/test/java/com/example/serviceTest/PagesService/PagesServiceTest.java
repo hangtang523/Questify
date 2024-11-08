@@ -119,4 +119,17 @@ public class PagesServiceTest {
         assertEquals(2, result.getList().size());
         verify(pagesMapper, times(1)).selectAll(any(Pages.class));
     }
+    @Test
+    public void testCopy() {
+        // 模拟 selectById、updateById 和 insert 方法返回的行为
+        when(pagesMapper.selectById(1)).thenReturn(page1);
+        when(pagesMapper.updateById(any(Pages.class))).thenReturn(1);
+        when(pagesMapper.insert(any(Pages.class))).thenReturn(1);
+
+        pagesService.copy(1);
+
+        verify(pagesMapper, times(1)).selectById(1);
+        verify(pagesMapper, times(1)).updateById(page1);
+        verify(pagesMapper, times(1)).insert(any(Pages.class));
+    }
 }

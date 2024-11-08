@@ -105,7 +105,7 @@ public class PagesService {
         this.updateById(pages);  // 更新使用次数
 
         Pages newPage = new Pages();
-        newPage.setName(pages.getName() + "-拷贝");
+        newPage.setName(pages.getName() + "-Copy");
         newPage.setDescr(pages.getDescr());
         newPage.setImg(pages.getImg());
 //        Account currentUser = TokenUtils.getCurrentUser();

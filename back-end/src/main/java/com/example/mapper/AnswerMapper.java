@@ -33,4 +33,5 @@ public interface AnswerMapper {
      */
     List<Answer> selectAll(Answer answer);
 
+    List<Answer> selectByPageId(Integer pageId);
 }

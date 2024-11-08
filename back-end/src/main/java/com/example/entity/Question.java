@@ -22,6 +22,16 @@ public class Question implements Serializable {
 
     private String pageName;
     private String userName;
+    /*用户填写数量*/
+    private Integer count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
     private List<QuestionItem> QuestionItemList;
 

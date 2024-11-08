@@ -112,4 +112,23 @@ public class AnswerServiceTest {
         assertEquals(2, result.getList().size());
         verify(answerMapper, times(1)).selectAll(any(Answer.class));
     }
+    @Test
+    public void testAddBatch() {
+        List<Answer> answerList = Arrays.asList(answer1, answer2);
+
+        answerService.addBatch(answerList);
+
+        verify(answerMapper, times(1)).insert(answer1);
+        verify(answerMapper, times(1)).insert(answer2);
+    }
+    @Test
+    public void testSelectByPageId() {
+        List<Answer> answerList = Arrays.asList(answer1, answer2);
+        when(answerMapper.selectByPageId(1)).thenReturn(answerList);
+
+        List<Answer> result = answerService.selectByPageId(1);
+
+        assertEquals(2, result.size());
+        verify(answerMapper, times(1)).selectByPageId(1);
+    }
 }
