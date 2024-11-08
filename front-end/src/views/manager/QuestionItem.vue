@@ -8,6 +8,7 @@
 
     <div class="operation">
       <el-button type="primary" plain @click="handleAdd">Add</el-button>
+
       <el-button type="danger" plain @click="delBatch">Batch delete</el-button>
     </div>
 
