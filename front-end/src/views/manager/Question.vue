@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="请输入名称查询" style="width: 200px" v-model="name"></el-input>
+      <el-input placeholder="Input Name to Enqury" style="width: 200px" v-model="name"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">Query</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">Reset</el-button>
     </div>
@@ -46,7 +46,7 @@
     <el-dialog title="Infroamtion" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="Question name" prop="name">
-          <el-input v-model="form.name" placeholder="题目名称"></el-input>
+          <el-input v-model="form.name" placeholder="Question Name"></el-input>
         </el-form-item>
         <el-form-item label="Question type" prop="type">
           <el-select style="width: 100%" v-model="form.type">
