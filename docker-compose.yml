@@ -8,14 +8,48 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - backend
+      - backend-1
+      - backend-2
+      - backend-3
 
-  backend:
+  backend-1:
     image: hangtang/questify-backend
     networks:
       - my-network
     ports:
       - "8080:9090"  # 映射主机的 8080 端口到容器的 9090 端口
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/questify  # 连接 MySQL 数据库
+      SPRING_DATASOURCE_USERNAME: root  # 数据库用户名
+      SPRING_DATASOURCE_PASSWORD: root  # 数据库密码
+      FILE_UPLOAD_PATH: /app/files/  # 指定容器内的上传路径
+    depends_on:
+      - mysql  # 确保后端在 MySQL 之前启动
+    volumes:
+      - ./files/:/app/files/
+      -
+  backend-2:
+    image: hangtang/questify-backend
+    networks:
+      - my-network
+    ports:
+      - "8081:9090"  # 映射主机的 8080 端口到容器的 9090 端口
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/questify  # 连接 MySQL 数据库
+      SPRING_DATASOURCE_USERNAME: root  # 数据库用户名
+      SPRING_DATASOURCE_PASSWORD: root  # 数据库密码
+      FILE_UPLOAD_PATH: /app/files/  # 指定容器内的上传路径
+    depends_on:
+      - mysql  # 确保后端在 MySQL 之前启动
+    volumes:
+      - ./files/:/app/files/
+
+  backend-3:
+    image: hangtang/questify-backend
+    networks:
+      - my-network
+    ports:
+      - "8082:9090"  # 映射主机的 8080 端口到容器的 9090 端口
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/questify  # 连接 MySQL 数据库
       SPRING_DATASOURCE_USERNAME: root  # 数据库用户名
