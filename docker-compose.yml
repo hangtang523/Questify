@@ -27,7 +27,7 @@ services:
       - mysql  # 确保后端在 MySQL 之前启动
     volumes:
       - ./files/:/app/files/
-      -
+
   backend-2:
     image: hangtang/questify-backend
     networks:
