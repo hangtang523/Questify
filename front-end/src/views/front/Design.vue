@@ -5,7 +5,7 @@
         <div style="flex: 1">
           <div>
             <span style="font-size: 24px; margin-right: 10px">{{ pages.name }}</span>
-            <el-tag v-if="pages.saved === 'No'">Not Published</el-tag>
+            <el-tag v-if="!pages.saved || pages.saved === 'No'">Not Published</el-tag>
             <el-tag v-else type="success">Published</el-tag>
           </div>
         </div>
