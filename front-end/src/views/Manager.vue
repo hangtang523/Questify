@@ -38,15 +38,18 @@
             <i class="el-icon-s-home"></i>
             <span slot="title">Dashboard</span>
           </el-menu-item>
+          <el-menu-item index="/notice">
+            <i class="el-icon-menu"></i>
+            <span slot="title">Notice Management</span>
+          </el-menu-item>
           <el-submenu index="info">
               <template slot="title">
-                <i class="el-icon-menu"></i><span>Infor Management</span>
+                <i class="el-icon-menu"></i><span>Survey Management</span>
               </template>
-                <el-menu-item index="/notice">Notice Management</el-menu-item>
-                <el-menu-item index="/pages">Pages Management</el-menu-item>
-                <el-menu-item index="/question">Question Information</el-menu-item>
-                <el-menu-item index="/questionItem">Question Content</el-menu-item>
-                <el-menu-item index="/answer">Answer Information</el-menu-item>
+                <el-menu-item index="/pages">Questionnaires</el-menu-item>
+                <el-menu-item index="/question">Questions</el-menu-item>
+                <el-menu-item index="/questionItem">Options</el-menu-item>
+                <el-menu-item index="/answer">Responses</el-menu-item>
 <!--            <el-menu-item index="/logs">操作日志</el-menu-item>-->
           </el-submenu>
           <el-submenu index="user">

@@ -16,8 +16,8 @@
       <el-table :data="tableData" strip @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center"></el-table-column>
         <el-table-column prop="id" label="id" width="70" align="center" sortable></el-table-column>
-        <el-table-column prop="name" label="Template Name"></el-table-column>
-        <el-table-column prop="descr" label="Template Description"></el-table-column>
+        <el-table-column prop="name" label="Template Name" width="160"></el-table-column>
+        <el-table-column prop="descr" label="Template Description" width="160"></el-table-column>
         <el-table-column prop="img" label="Cover">
           <template v-slot="scope">
             <div style="display: flex; align-items: center">
@@ -26,10 +26,10 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="count" label="Used times"></el-table-column>
-        <el-table-column prop="userId" label="Creator ID"></el-table-column>
+        <el-table-column prop="count" label="Used times" width="120"></el-table-column>
+<!--        <el-table-column prop="userId" label="Creator ID"></el-table-column>-->
         <el-table-column prop="username" label="Creator "></el-table-column>
-        <el-table-column prop="createTime" label="Create time"></el-table-column>
+        <el-table-column prop="createTime" label="Create time" width="140"></el-table-column>
         <el-table-column prop="open" label="Public"></el-table-column>
         <el-table-column prop="saved" label="Publish"></el-table-column>
         <el-table-column label="Actions" align="center" width="180">

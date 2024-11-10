@@ -21,12 +21,12 @@ const routes = [
       { path: 'admin', name: 'Admin', meta: { name: 'Admin Management' }, component: () => import('../views/manager/Admin') },
       { path: 'adminPerson', name: 'AdminPerson', meta: { name: 'Profile' }, component: () => import('../views/manager/AdminPerson') },
       { path: 'password', name: 'Password', meta: { name: 'Reset Password' }, component: () => import('../views/manager/Password') },
-      { path: 'notice', name: 'Notice', meta: { name: 'Announcement Management' }, component: () => import('../views/manager/Notice') },
+      { path: 'notice', name: 'Notice', meta: { name: 'Notice Management' }, component: () => import('../views/manager/Notice') },
       { path: 'user', name: 'User', meta: { name: 'User Information' }, component: () => import('../views/manager/User') },
-      { path: 'pages', name: 'Pages', meta: { name: 'Pages Information' }, component: () => import('../views/manager/Pages') },
-      { path: 'question', name: 'Question', meta: { name: 'Question Information' }, component: () => import('../views/manager/Question') },
-      { path: 'questionItem', name: 'QuestionItem', meta: { name: 'Question Content' }, component: () => import('../views/manager/QuestionItem') },
-      { path: 'answer', name: 'Answer', meta: { name: 'Answers Information' }, component: () => import('../views/manager/Answer') },
+      { path: 'pages', name: 'Pages', meta: { name: 'Questionnaires' }, component: () => import('../views/manager/Pages') },
+      { path: 'question', name: 'Question', meta: { name: 'Questions ' }, component: () => import('../views/manager/Question') },
+      { path: 'questionItem', name: 'QuestionItem', meta: { name: 'Options' }, component: () => import('../views/manager/QuestionItem') },
+      { path: 'answer', name: 'Answer', meta: { name: 'Responses' }, component: () => import('../views/manager/Answer') },
 
     ]
   },

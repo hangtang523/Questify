@@ -14,7 +14,7 @@
           <el-menu :default-active="$route.path" mode="horizontal" router>
             <el-menu-item index="/front/home">Home</el-menu-item>
 
-            <el-menu-item index="/front/pages">My Pages </el-menu-item>
+            <el-menu-item index="/front/pages">My Questionnaires</el-menu-item>
             <el-menu-item index="/front/person">Personal Center</el-menu-item>
           </el-menu>
         </div>
