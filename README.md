@@ -154,5 +154,5 @@ Contributors names and contact info
 
 ## Version History
 
-Refer to [GitHub Releases](https://github.com/hangtang523/releases)
+Refer to [GitHub Releases](https://github.com/hangtang523/Questify/releases)
 
